@@ -41,6 +41,10 @@
 
 </script>
 
+<svelte:head>
+    <title>{type}</title>
+</svelte:head>
+
 <h1>{type}</h1>
 
 <p>

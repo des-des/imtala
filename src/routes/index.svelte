@@ -19,8 +19,17 @@
         schemaRequest = introspectionState
     })
 
-	$: queryType = schemaRequest && schemaRequest.kind === 'success' && schemaRequest.schema.getQueryType();
+    $: schema = schemaRequest && schemaRequest.kind === 'success' && schemaRequest.schema
+
+	$: queryType = schema && schema.getQueryType();
+	$: mutationType = schema && schema.getMutationType();
+	$: subscriptionType = schema && schema.getSubscriptionType();
 </script>
+
+<svelte:head>
+    <title>Root types</title>
+</svelte:head>
+
 
 {#if !schemaRequest || schemaRequest.kind === 'initialising'}
   <span>LOADING</span>
@@ -32,9 +41,27 @@
             'A GraphQL schema provides a root type for each kind of operation.'}
     </p>
 
-    <h2>
-        root types
-    </h2>
+    {#if queryType}
+        <h2>
+            Query Type
+        </h2>
 
-    <TypeLink type={queryType} />
+        <TypeLink type={queryType} />
+    {/if}
+
+    {#if mutationType}
+        <h2>
+            Mutation Type
+        </h2>
+
+        <TypeLink type={mutationType} />
+    {/if}
+
+    {#if subscriptionType}
+        <h2>
+            Subscription Type
+        </h2>
+
+        <TypeLink type={subscriptionType} />
+    {/if}
 {/if}
