@@ -1,66 +1,40 @@
-<script context='module'>
-    // export const prerender = true;
-    import {
-        getIntrospectionQuery,
-        buildClientSchema
-    } from 'graphql';
-
-    import { GraphQLClient } from 'graphql-request'
-
-    const introspectionQuery = getIntrospectionQuery()
+<script context='module' lang='ts'>
+    import introspectionStore, {StoreState} from '../lib/stores/introspectionQuery'
+    import TypeLink from '../lib/TypeLink.svelte'
 
     /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ page, fetch, session, stuff }) {
-        const client = new GraphQLClient('/graphql', { fetch })
+	export async function load({ fetch }) {
+        await introspectionStore.init(fetch)
 
-        try {
-            
-            const introspectionQueryResponse = await fetch('/graphql', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    query: introspectionQuery
-                })
-            })
-
-            if (introspectionQueryResponse.ok) {
-                return {
-                    props: {
-                        type: page.params.typeName,
-                        introspectionQueryResponse: await introspectionQueryResponse.json()
-                    }
-                };
-            } else {
-                return {
-                    status: introspectionQueryResponse.status,
-                    error: 'request failed'
-                }
-            }
-        } catch (error) {
-            return {
-                error
-            }
+        return {
+            props: {}
         }
-        
     }
 </script>
 
-<script>
-    import TypeLink from '../lib/TypeLink.svelte'
-	export let introspectionQueryResponse;
-    export let schema = buildClientSchema(introspectionQueryResponse)
-    const queryType = schema && schema.getQueryType();
+<script lang='ts'>
+    let schemaRequest: StoreState;
+    
+    introspectionStore.subscribe((introspectionState) => {
+        schemaRequest = introspectionState
+    })
+
+	$: queryType = schemaRequest && schemaRequest.kind === 'success' && schemaRequest.schema.getQueryType();
 </script>
 
-<p>
-    {schema.description ||
-        'A GraphQL schema provides a root type for each kind of operation.'}
-</p>
+{#if !schemaRequest || schemaRequest.kind === 'initialising'}
+  <span>LOADING</span>
+{:else if schemaRequest.kind === 'error'}
+    <span>Error</span>
+{:else}
+    <p>
+        {schemaRequest.schema.description ||
+            'A GraphQL schema provides a root type for each kind of operation.'}
+    </p>
 
-<h2>
-    root types
-</h2>
+    <h2>
+        root types
+    </h2>
 
-<TypeLink type={queryType} />
+    <TypeLink type={queryType} />
+{/if}

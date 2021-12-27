@@ -1,58 +1,29 @@
 <script context='module' lang='ts'>
-    // export const prerender = true;
-
-    import {
-        getIntrospectionQuery,
-        buildClientSchema
-    } from 'graphql';
-
-
-    const introspectionQuery = getIntrospectionQuery()
+    import introspectionStore, {StoreState} from '../../lib/stores/introspectionQuery'
+    import TypeLink from '../../lib/TypeLink.svelte'
 
     /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ page, fetch, session, stuff }) {
-        try {
-            const introspectionQueryResponse = await fetch('/graphql', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    query: introspectionQuery
-                })
-            })
+	export async function load({ fetch, page }) {
+        await introspectionStore.init(fetch)        
 
-            if (introspectionQueryResponse.ok) {
-                return {
-                    props: {
-                        type: page.params.typeName,
-                        introspectionQueryResponse: await introspectionQueryResponse.json()
-                    }
-                };
-            } else {
-                return {
-                    status: introspectionQueryResponse.status,
-                    error: 'request failed'
-                }
+        return {
+            props: {
+                type: page.params.typeName,
             }
-
-        } catch (error) {
-            console.error('LOADING FAILED WITH ERROR', error)
-            console.error(error)
-            return {
-                error
-            }
-        }
-
-    }
+        };
+    };
 </script>
 
 <script lang='ts'>
     
-    import TypeLink from '../../lib/TypeLink.svelte'
-	export let introspectionQueryResponse;
+    let schemaRequest: StoreState;
+    
+    introspectionStore.subscribe((introspectionState) => {
+        schemaRequest = introspectionState
+    })
+
 	export let type: string;
-    export let schema = buildClientSchema(introspectionQueryResponse)
+    $: schema = schemaRequest && schemaRequest.kind ==='success' && schemaRequest.schema
 
     import {
         GraphQLUnionType,
