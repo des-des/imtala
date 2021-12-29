@@ -30,6 +30,5 @@
 {:else if type instanceof GraphQLList}
     [<svelte:self type={type.ofType} />]
 {:else}
-<a href={`/type/${type.name}/`}>{type.name}</a>
-<!-- <span>tmp</span> -->
+<a href={`/${type.name}/`}>{type.name}</a>
 {/if}

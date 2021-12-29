@@ -2,12 +2,15 @@
     import introspectionStore, {StoreState} from '../lib/stores/introspectionQuery'
     import GraphQlRoot from '../lib/components/GraphQLRoot.svelte'
 
+
     /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch }) {
+	export async function load({ fetch, page }) {
         await introspectionStore.init(fetch)
 
         return {
-            props: {}
+            props: {
+                typeName: page.params.typeName,
+            }
         }
     }
 </script>
@@ -19,12 +22,12 @@
         introspectionRequest = introspectionState
     })
 
+	export let typeName: string;
 </script>
 
 <svelte:head>
-    <title>Root types</title>
+    <title>{typeName}</title>
 </svelte:head>
-
 
 {#if !introspectionRequest || introspectionRequest.kind === 'initialising'}
   <span>LOADING</span>
@@ -34,5 +37,5 @@
         {JSON.stringify(introspectionRequest.error, null, 4)}
     </pre>
 {:else}
-    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery}/>
+    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery} typeName={typeName}/>
 {/if}

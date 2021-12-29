@@ -1,7 +1,14 @@
-# create-svelte
+# Graphql Documentation Creator
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+Easily create lightweight documentation for for Graphql API using an introspection query.
 
+This tool generates a static webistte - for every query, mutation or type in you schema a lightweight html page is created. Fast, simple and themeable.
+
+Check out a few demo pages:
+  - github docs
+  - hacker news
+
+## How to use
 ## Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!

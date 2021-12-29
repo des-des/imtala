@@ -2,18 +2,14 @@ import { writable } from "svelte/store";
 
 import {
     getIntrospectionQuery,
-    buildClientSchema,
 } from 'graphql';
-
-import type {
-    GraphQLSchema
-} from 'graphql'
+import type { IntrospectionQuery } from 'graphql'
 
 export type StoreState = {
     kind: 'initialising';
 } | {
     kind: 'success';
-    schema: GraphQLSchema;
+    introspectionQuery: IntrospectionQuery;
     status: number;
 } | {
     kind: 'error';
@@ -51,11 +47,13 @@ const introspectionStore = (() => {
                         error: await introspectionQueryResponse.json()
                     })
                 }
+
+                const introspectionQueryPayload = await introspectionQueryResponse.json()
     
                 set({
                     kind: 'success',
                     status: introspectionQueryResponse.status as number,
-                    schema: buildClientSchema(await introspectionQueryResponse.json())
+                    introspectionQuery: introspectionQueryPayload as never as IntrospectionQuery
                 })
             } catch (e) {
                 set({
