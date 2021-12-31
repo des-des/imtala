@@ -6,6 +6,7 @@
     } from 'graphql';
 
     export let type: GraphQLType | null | undefined;
+    export let rootPath: string;
 </script>
 
 <style>
@@ -30,5 +31,5 @@
 {:else if type instanceof GraphQLList}
     [<svelte:self type={type.ofType} />]
 {:else}
-<a href={`/${type.name}/`}>{type.name}</a>
+<a href={`${rootPath}/${type.name}`}>{type.name}</a>
 {/if}

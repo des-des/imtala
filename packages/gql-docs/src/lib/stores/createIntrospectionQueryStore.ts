@@ -21,30 +21,24 @@ const { subscribe, set } = writable<StoreState>({
     kind: 'initialising'
 });
 
-const introspectionStore = (() => {
+const createIntrospectionStore = () => {
     let initCalled = false;
     return {
         subscribe,
-        init: async (fetch) => {
+        init: async (fetchIntrospection) => {
             if (initCalled) return;
             initCalled = true;
 
             try {
-                const introspectionQueryResponse = await fetch('/graphql', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        query: getIntrospectionQuery()
-                    })
-                })
+                const introspectionQueryResponse = await fetchIntrospection();
     
                 if (!introspectionQueryResponse.ok) {
+                    const payload = await introspectionQueryResponse.json()
+                    console.error(payload)
                     set({
                         kind: 'error',
                         status: introspectionQueryResponse.status as number,
-                        error: await introspectionQueryResponse.json()
+                        error: payload
                     })
                 }
 
@@ -56,6 +50,8 @@ const introspectionStore = (() => {
                     introspectionQuery: introspectionQueryPayload as never as IntrospectionQuery
                 })
             } catch (e) {
+                console.error(e);
+                
                 set({
                     kind: 'error',
                     status: 500,
@@ -64,6 +60,6 @@ const introspectionStore = (() => {
             }
         }
     }
-})();
+};
 
-export default introspectionStore
+export default createIntrospectionStore

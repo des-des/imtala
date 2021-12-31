@@ -1,15 +1,27 @@
 <script context='module' lang='ts'>
-    import introspectionStore, {StoreState} from '../lib/stores/introspectionQuery'
+    import introspectionStore, {StoreState} from '../lib/stores/introspectionQueryStore'
     import GraphQlRoot from '../lib/components/GraphQLRoot.svelte'
+    import { getIntrospectionQuery } from 'graphql';
 
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
-        await introspectionStore.init(fetch)
+        await introspectionStore.init(() =>
+            fetch('/graphql', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    query: getIntrospectionQuery()
+                })
+            })
+        )
 
         return {
             props: {}
         }
     }
+
 </script>
 
 <script lang='ts'>
