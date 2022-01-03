@@ -1,6 +1,6 @@
 {
   ".svelte-kit/build/runtime/internal/start.js": {
-    "file": "start-5166bd38.js",
+    "file": "start-2b5e773c.js",
     "src": ".svelte-kit/build/runtime/internal/start.js",
     "isEntry": true,
     "imports": [
@@ -37,7 +37,7 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-662afcbb.js",
+    "file": "pages/index.svelte-2f8919c1.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -46,24 +46,24 @@
     ]
   },
   "src/routes/examples/github/index.svelte": {
-    "file": "pages/examples/github/index.svelte-b106d1bb.js",
+    "file": "pages/examples/github/index.svelte-41f7788c.js",
     "src": "src/routes/examples/github/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_vendor-1a106b99.js",
-      "_githubIntrospectionStore-c53a010d.js",
+      "_githubIntrospectionStore-afa31460.js",
       "_paths-28a87002.js"
     ]
   },
   "src/routes/examples/github/[typeName].svelte": {
-    "file": "pages/examples/github/_typeName_.svelte-38ca709c.js",
+    "file": "pages/examples/github/_typeName_.svelte-667f8b53.js",
     "src": "src/routes/examples/github/[typeName].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_vendor-1a106b99.js",
-      "_githubIntrospectionStore-c53a010d.js",
+      "_githubIntrospectionStore-afa31460.js",
       "_paths-28a87002.js"
     ]
   },
@@ -73,8 +73,8 @@
   "_paths-28a87002.js": {
     "file": "chunks/paths-28a87002.js"
   },
-  "_githubIntrospectionStore-c53a010d.js": {
-    "file": "chunks/githubIntrospectionStore-c53a010d.js",
+  "_githubIntrospectionStore-afa31460.js": {
+    "file": "chunks/githubIntrospectionStore-afa31460.js",
     "imports": [
       "_vendor-1a106b99.js"
     ],
