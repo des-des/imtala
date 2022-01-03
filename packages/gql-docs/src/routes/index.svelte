@@ -1,6 +1,6 @@
 <script context='module' lang='ts'>
     import introspectionStore, {StoreState} from '../lib/stores/introspectionQueryStore'
-    import GraphQlRoot from '../lib/components/GraphQLRoot.svelte'
+    import GraphQlRoot from '../lib/components/GqlDocumentation.svelte'
     import { getIntrospectionQuery } from 'graphql';
 
     /** @type {import('@sveltejs/kit').Load} */
