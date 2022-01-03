@@ -13,6 +13,9 @@ This tool generates a static website - for every query, mutation or type in you 
 ### Use as a svelte component
 If you are using svelte and want to integrate gql docs into an existing website you can use the `GqlDocumentation` component exposed the the npm module: `@insola/gql-docs-svelte`
 
+### Use as a cli tool
+  - Raise an issue if you want to use this tool to create a static site without using svelte, Ill publish a cli tool that will wrap all this up and generate a static website.
+
 <!-- ### Use as a cli tool
   1. Install either as a local module or globally - `npm i @insola/gql-docs-cli`
   2. Build your static documentation site.
