@@ -25,7 +25,7 @@
     $: fieldMap = pageType && 'getFields' in pageType && pageType.getFields();
     $: fields = fieldMap && Object.keys(fieldMap).map(k => fieldMap[k])
     $: title = typeof typeName === 'string' ? typeName : 'Root types';
-    $: rootPath = typeof typeName !== 'string' ? path : path.split('/').reverse().slice(1).reverse().join('/')
+    $: rootPath = typeof typeName !== 'string' ? path : path.split('/').reverse().slice(1).reverse().join('/');
 
 </script>
 <svelte:head>
