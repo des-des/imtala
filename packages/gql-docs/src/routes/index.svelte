@@ -21,7 +21,6 @@
             props: {}
         }
     }
-
 </script>
 
 <script lang='ts'>

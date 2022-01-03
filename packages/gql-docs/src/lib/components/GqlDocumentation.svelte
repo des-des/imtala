@@ -8,15 +8,10 @@
     } from 'graphql';
     import type { IntrospectionQuery } from 'graphql'
     export let typeName: string = undefined;
-    export let introspectionQuery: IntrospectionQuery;
+    export let rootPath: string;
+    export let introspectionQuery: any;
     import TypeLink from './TypeLink.svelte'
-    import { page } from '$app/stores';
 
-    let path: string = '';
-    page.subscribe(page => {
-        path = page.url.pathname;
-    })
-    
     $: schema = buildClientSchema(introspectionQuery as never as IntrospectionQuery)
 	$: queryType = schema.getQueryType();
 	$: mutationType = schema.getMutationType();
@@ -25,7 +20,6 @@
     $: fieldMap = pageType && 'getFields' in pageType && pageType.getFields();
     $: fields = fieldMap && Object.keys(fieldMap).map(k => fieldMap[k])
     $: title = typeof typeName === 'string' ? typeName : 'Root types';
-    $: rootPath = typeof typeName !== 'string' ? path : path.split('/').reverse().slice(1).reverse().join('/');
 
 </script>
 <svelte:head>

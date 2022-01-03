@@ -11,10 +11,14 @@ This tool generates a static website - for every query, mutation or type in you 
 ## Usage
 
 ### Use as a svelte component
-If you are using svelte and want to integrate gql docs into an existing website you can use the `GqlDocumentation` component exposed the the npm module: `@insola/gql-docs-svelte`
+If you are using svelte and want to integrate gql docs into an existing website you can use the `GqlDocumentation` component exposed the the npm module: `@insola/gql-docs-svelte`.
+  - you will need to install `graphql` as a dependency, since currently svelte/kit does not include this in the bundle
 
 ### Use as a cli tool
-  - Raise an issue if you want to use this tool to create a static site without using svelte, Ill publish a cli tool that will wrap all this up and generate a static website.
+  - Raise an issue if you want to use this tool to create a static site without using svelte. A cli tool will be published on npm shortly.
+
+## Examples
+  - [Github's public GraphQL API](https://des-des.github.io/imtala/examples/github/)
 
 <!-- ### Use as a cli tool
   1. Install either as a local module or globally - `npm i @insola/gql-docs-cli`

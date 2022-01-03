@@ -1,8 +1,5 @@
 import { writable } from "svelte/store";
 
-import {
-    getIntrospectionQuery,
-} from 'graphql';
 import type { IntrospectionQuery } from 'graphql'
 
 export type StoreState = {

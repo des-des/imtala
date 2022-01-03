@@ -1,6 +1,6 @@
 {
   "name": "@imtala/gql-docs",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A svelte component that creates GraphQL documentation",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -15,7 +15,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-static": "^1.0.0-next.23",
-    "@sveltejs/kit": "next",
+    "@sveltejs/kit": "^1.0.0-next.215",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "eslint": "^7.32.0",
@@ -31,10 +31,6 @@
     "typescript": "^4.4.3"
   },
   "type": "module",
-  "dependencies": {
-    "@types/graphql": "^14.5.0",
-    "graphql": "^16.2.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/des-des/imtala.git"
@@ -49,5 +45,8 @@
   "bugs": {
     "url": "https://github.com/des-des/imtala/issues"
   },
-  "homepage": "https://github.com/des-des/imtala#readme"
+  "homepage": "https://github.com/des-des/imtala#readme",
+  "dependencies": {
+    "graphql": "^16.2.0"
+  }
 }
