@@ -1,10 +1,10 @@
 {
   ".svelte-kit/build/runtime/internal/start.js": {
-    "file": "start-62697bea.js",
+    "file": "start-05daaa42.js",
     "src": ".svelte-kit/build/runtime/internal/start.js",
     "isEntry": true,
     "imports": [
-      "_vendor-34c9f772.js"
+      "_vendor-1a106b99.js"
     ],
     "dynamicImports": [
       ".svelte-kit/build/components/layout.svelte",
@@ -18,59 +18,59 @@
     ]
   },
   ".svelte-kit/build/components/layout.svelte": {
-    "file": "layout.svelte-b7dc3560.js",
+    "file": "layout.svelte-1781b503.js",
     "src": ".svelte-kit/build/components/layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-34c9f772.js"
+      "_vendor-1a106b99.js"
     ]
   },
   ".svelte-kit/build/components/error.svelte": {
-    "file": "error.svelte-d472d7ce.js",
+    "file": "error.svelte-e869eeec.js",
     "src": ".svelte-kit/build/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-34c9f772.js"
+      "_vendor-1a106b99.js"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-04f0a5fc.js",
+    "file": "pages/index.svelte-662afcbb.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-34c9f772.js"
+      "_vendor-1a106b99.js"
     ]
   },
   "src/routes/examples/github/index.svelte": {
-    "file": "pages/examples/github/index.svelte-618af678.js",
+    "file": "pages/examples/github/index.svelte-a54ff31f.js",
     "src": "src/routes/examples/github/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-34c9f772.js",
-      "_githubIntrospectionStore-ed858495.js"
+      "_vendor-1a106b99.js",
+      "_githubIntrospectionStore-6f9b6ce5.js"
     ]
   },
   "src/routes/examples/github/[typeName].svelte": {
-    "file": "pages/examples/github/_typeName_.svelte-e9b90ea6.js",
+    "file": "pages/examples/github/_typeName_.svelte-b2e5bb81.js",
     "src": "src/routes/examples/github/[typeName].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-34c9f772.js",
-      "_githubIntrospectionStore-ed858495.js"
+      "_vendor-1a106b99.js",
+      "_githubIntrospectionStore-6f9b6ce5.js"
     ]
   },
-  "_vendor-34c9f772.js": {
-    "file": "chunks/vendor-34c9f772.js"
+  "_vendor-1a106b99.js": {
+    "file": "chunks/vendor-1a106b99.js"
   },
-  "_githubIntrospectionStore-ed858495.js": {
-    "file": "chunks/githubIntrospectionStore-ed858495.js",
+  "_githubIntrospectionStore-6f9b6ce5.js": {
+    "file": "chunks/githubIntrospectionStore-6f9b6ce5.js",
     "imports": [
-      "_vendor-34c9f772.js"
+      "_vendor-1a106b99.js"
     ],
     "css": [
       "assets/githubIntrospectionStore-34b2536e.css"
