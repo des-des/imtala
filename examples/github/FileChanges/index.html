@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>
+        FileChanges
+    </title>
+
+		
+
+		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
+		<link rel="stylesheet" href="/_app/assets/githubIntrospectionStore-34b2536e.css">
+		<link rel="modulepreload" href="/_app/start-8f1e8856.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-34c9f772.js">
+		<link rel="modulepreload" href="/_app/layout.svelte-b7dc3560.js">
+		<link rel="modulepreload" href="/_app/pages/examples/github/_typeName_.svelte-dc760ca4.js">
+		<link rel="modulepreload" href="/_app/chunks/githubIntrospectionStore-3131b810.js">
+
+		<script type="module">
+			import { start } from "/_app/start-8f1e8856.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":""},
+				session: {},
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/_app/layout.svelte-b7dc3560.js"),
+						import("/_app/pages/examples/github/_typeName_.svelte-dc760ca4.js")
+					],
+					url: new URL("http://prerender/examples/github/FileChanges"),
+					params: {typeName:"FileChanges"}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600&display=swap');
+		
+			body, head {
+				padding: 0;
+				margin: 0;
+				background-color: black;
+				color: white;
+				font-family: 'Noto Sans Mono', monospace;
+			}
+
+			:root {
+				--green-glitter: #d8e365;
+				--daiquiri-green: #c3d877;
+				--lime-parfait: #98ca74;
+				--primo: #81bd6f;
+				--endo: #64a960;
+				--greenbrier: #4f9765;
+				--adamite-green: #3d836b;
+				--loon-turquoise: #2e6874;
+				--darkest: #213a57;
+			}
+
+			code {
+				background-color: var(--darkest);
+			}
+
+
+			@media (min-width: 814px) {
+				body {
+					width: 814px;
+					margin: auto;
+					border-left: 1px solid white;
+					padding-left: 10px;
+					font-size: 1.2rem;
+					/* border-collapse: separate; */
+					/* @media (max-width: 814px) {
+						
+						margin-left: 10%;
+						margin-right: 10%;
+					} */
+				}
+
+			}
+
+			a {
+				text-decoration: none;
+				color: var(--green-glitter)
+			}
+
+			a:visited {
+				color: var(--endo);
+			}
+
+			a:hover {
+				background-color: var(--loon-turquoise);
+			}
+		</style>
+		<div id="svelte">
+
+
+
+
+
+
+
+
+<h1>FileChanges</h1>
+
+    <p>A description of a set of changes to a file tree to be made as part of
+a git commit, modeled as zero or more file `additions` and zero or more
+file `deletions`.
+
+Both fields are optional; omitting both will produce a commit with no
+file changes.
+
+`deletions` and `additions` describe changes to files identified
+by their path in the git tree using unix-style path separators, i.e.
+`/`.  The root of a git tree is an empty string, so paths are not
+slash-prefixed.
+
+`path` values must be unique across all `additions` and `deletions`
+provided.  Any duplication will result in a validation error.
+
+### Encoding
+
+File contents must be provided in full for each `FileAddition`.
+
+The `contents` of a `FileAddition` must be encoded using RFC 4648
+compliant base64, i.e. correct padding is required and no characters
+outside the standard alphabet may be used.  Invalid base64
+encoding will be rejected with a validation error.
+
+The encoded contents may be binary.
+
+For text files, no assumptions are made about the character encoding of
+the file contents (after base64 decoding).  No charset transcoding or
+line-ending normalization will be performed; it is the client&#39;s
+responsibility to manage the character encoding of files they provide.
+However, for maximum compatibility we recommend using UTF-8 encoding
+and ensuring that all files in a repository use a consistent
+line-ending convention (`\n` or `\r\n`), and that all files end
+with a newline.
+
+### Modeling file changes
+
+Each of the the five types of conceptual changes that can be made in a
+git commit can be described using the `FileChanges` type as follows:
+
+1. New file addition: create file `hello world\n` at path `docs/README.txt`:
+
+       {
+         &quot;additions&quot; [
+           {
+             &quot;path&quot;: &quot;docs/README.txt&quot;,
+             &quot;contents&quot;: base64encode(&quot;hello world\n&quot;)
+           }
+         ]
+       }
+
+2. Existing file modification: change existing `docs/README.txt` to have new
+   content `new content here\n`:
+
+       {
+         &quot;additions&quot; [
+           {
+             &quot;path&quot;: &quot;docs/README.txt&quot;,
+             &quot;contents&quot;: base64encode(&quot;new content here\n&quot;)
+           }
+         ]
+       }
+
+3. Existing file deletion: remove existing file `docs/README.txt`.
+   Note that the path is required to exist -- specifying a
+   path that does not exist on the given branch will abort the
+   commit and return an error.
+
+       {
+         &quot;deletions&quot; [
+           {
+             &quot;path&quot;: &quot;docs/README.txt&quot;
+           }
+         ]
+       }
+
+
+4. File rename with no changes: rename `docs/README.txt` with
+   previous content `hello world\n` to the same content at
+   `newdocs/README.txt`:
+
+       {
+         &quot;deletions&quot; [
+           {
+             &quot;path&quot;: &quot;docs/README.txt&quot;,
+           }
+         ],
+         &quot;additions&quot; [
+           {
+             &quot;path&quot;: &quot;newdocs/README.txt&quot;,
+             &quot;contents&quot;: base64encode(&quot;hello world\n&quot;)
+           }
+         ]
+       }
+
+
+5. File rename with changes: rename `docs/README.txt` with
+   previous content `hello world\n` to a file at path
+   `newdocs/README.txt` with content `new contents\n`:
+
+       {
+         &quot;deletions&quot; [
+           {
+             &quot;path&quot;: &quot;docs/README.txt&quot;,
+           }
+         ],
+         &quot;additions&quot; [
+           {
+             &quot;path&quot;: &quot;newdocs/README.txt&quot;,
+             &quot;contents&quot;: base64encode(&quot;new contents\n&quot;)
+           }
+         ]
+       }
+</p>
+
+
+    
+
+    <h2>Fields</h2>
+
+        <p>deletions
+                
+                : 
+                [<a href="/examples/github/FileDeletion" class="svelte-1y48hv4">FileDeletion</a>!]
+            </p><p>additions
+                
+                : 
+                [<a href="/examples/github/FileAddition" class="svelte-1y48hv4">FileAddition</a>!]
+            </p>
+
+</div>
+	</body>
+</html>

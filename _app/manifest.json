@@ -1,0 +1,79 @@
+{
+  ".svelte-kit/build/runtime/internal/start.js": {
+    "file": "start-8f1e8856.js",
+    "src": ".svelte-kit/build/runtime/internal/start.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-34c9f772.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/build/components/layout.svelte",
+      ".svelte-kit/build/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/examples/github/index.svelte",
+      "src/routes/examples/github/[typeName].svelte"
+    ],
+    "css": [
+      "assets/start-61d1577b.css"
+    ]
+  },
+  ".svelte-kit/build/components/layout.svelte": {
+    "file": "layout.svelte-b7dc3560.js",
+    "src": ".svelte-kit/build/components/layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-34c9f772.js"
+    ]
+  },
+  ".svelte-kit/build/components/error.svelte": {
+    "file": "error.svelte-d472d7ce.js",
+    "src": ".svelte-kit/build/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-34c9f772.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-04f0a5fc.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-34c9f772.js"
+    ]
+  },
+  "src/routes/examples/github/index.svelte": {
+    "file": "pages/examples/github/index.svelte-e6bdc9ea.js",
+    "src": "src/routes/examples/github/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-34c9f772.js",
+      "_githubIntrospectionStore-3131b810.js"
+    ]
+  },
+  "src/routes/examples/github/[typeName].svelte": {
+    "file": "pages/examples/github/_typeName_.svelte-dc760ca4.js",
+    "src": "src/routes/examples/github/[typeName].svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-34c9f772.js",
+      "_githubIntrospectionStore-3131b810.js"
+    ]
+  },
+  "_vendor-34c9f772.js": {
+    "file": "chunks/vendor-34c9f772.js"
+  },
+  "_githubIntrospectionStore-3131b810.js": {
+    "file": "chunks/githubIntrospectionStore-3131b810.js",
+    "imports": [
+      "_vendor-34c9f772.js"
+    ],
+    "css": [
+      "assets/githubIntrospectionStore-34b2536e.css"
+    ]
+  }
+}

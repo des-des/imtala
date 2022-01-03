@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>
+        Organization
+    </title>
+
+		
+
+		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
+		<link rel="stylesheet" href="/_app/assets/githubIntrospectionStore-34b2536e.css">
+		<link rel="modulepreload" href="/_app/start-8f1e8856.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-34c9f772.js">
+		<link rel="modulepreload" href="/_app/layout.svelte-b7dc3560.js">
+		<link rel="modulepreload" href="/_app/pages/examples/github/_typeName_.svelte-dc760ca4.js">
+		<link rel="modulepreload" href="/_app/chunks/githubIntrospectionStore-3131b810.js">
+
+		<script type="module">
+			import { start } from "/_app/start-8f1e8856.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":""},
+				session: {},
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/_app/layout.svelte-b7dc3560.js"),
+						import("/_app/pages/examples/github/_typeName_.svelte-dc760ca4.js")
+					],
+					url: new URL("http://prerender/examples/github/Organization"),
+					params: {typeName:"Organization"}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600&display=swap');
+		
+			body, head {
+				padding: 0;
+				margin: 0;
+				background-color: black;
+				color: white;
+				font-family: 'Noto Sans Mono', monospace;
+			}
+
+			:root {
+				--green-glitter: #d8e365;
+				--daiquiri-green: #c3d877;
+				--lime-parfait: #98ca74;
+				--primo: #81bd6f;
+				--endo: #64a960;
+				--greenbrier: #4f9765;
+				--adamite-green: #3d836b;
+				--loon-turquoise: #2e6874;
+				--darkest: #213a57;
+			}
+
+			code {
+				background-color: var(--darkest);
+			}
+
+
+			@media (min-width: 814px) {
+				body {
+					width: 814px;
+					margin: auto;
+					border-left: 1px solid white;
+					padding-left: 10px;
+					font-size: 1.2rem;
+					/* border-collapse: separate; */
+					/* @media (max-width: 814px) {
+						
+						margin-left: 10%;
+						margin-right: 10%;
+					} */
+				}
+
+			}
+
+			a {
+				text-decoration: none;
+				color: var(--green-glitter)
+			}
+
+			a:visited {
+				color: var(--endo);
+			}
+
+			a:hover {
+				background-color: var(--loon-turquoise);
+			}
+		</style>
+		<div id="svelte">
+
+
+
+
+
+
+
+
+<h1>Organization</h1>
+
+    <p>An account on GitHub, with one or more owners, that has repositories, members and teams.</p>
+
+
+    <h2>Implements</h2>
+        <ul><li><a href="/examples/github/Node" class="svelte-1y48hv4">Node</a></li><li><a href="/examples/github/Actor" class="svelte-1y48hv4">Actor</a></li><li><a href="/examples/github/PackageOwner" class="svelte-1y48hv4">PackageOwner</a></li><li><a href="/examples/github/ProjectOwner" class="svelte-1y48hv4">ProjectOwner</a></li><li><a href="/examples/github/ProjectNextOwner" class="svelte-1y48hv4">ProjectNextOwner</a></li><li><a href="/examples/github/RepositoryDiscussionAuthor" class="svelte-1y48hv4">RepositoryDiscussionAuthor</a></li><li><a href="/examples/github/RepositoryDiscussionCommentAuthor" class="svelte-1y48hv4">RepositoryDiscussionCommentAuthor</a></li><li><a href="/examples/github/RepositoryOwner" class="svelte-1y48hv4">RepositoryOwner</a></li><li><a href="/examples/github/UniformResourceLocatable" class="svelte-1y48hv4">UniformResourceLocatable</a></li><li><a href="/examples/github/MemberStatusable" class="svelte-1y48hv4">MemberStatusable</a></li><li><a href="/examples/github/ProfileOwner" class="svelte-1y48hv4">ProfileOwner</a></li><li><a href="/examples/github/Sponsorable" class="svelte-1y48hv4">Sponsorable</a></li></ul>
+
+    <h2>Fields</h2>
+
+        <p>anyPinnableItems
+                (<br>
+                           <span>type: <a href="/examples/github/PinnableItemType" class="svelte-1y48hv4">PinnableItemType</a></span><br>
+                )
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>auditLog
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>query: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>orderBy: <a href="/examples/github/AuditLogOrder" class="svelte-1y48hv4">AuditLogOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/OrganizationAuditEntryConnection" class="svelte-1y48hv4">OrganizationAuditEntryConnection</a>!
+            </p><p>avatarUrl
+                (<br>
+                           <span>size: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>createdAt
+                
+                : 
+                <a href="/examples/github/DateTime" class="svelte-1y48hv4">DateTime</a>!
+            </p><p>databaseId
+                
+                : 
+                <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a>
+            </p><p>description
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>descriptionHTML
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>domains
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>isVerified: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                           <span>isApproved: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                           <span>orderBy: <a href="/examples/github/VerifiableDomainOrder" class="svelte-1y48hv4">VerifiableDomainOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/VerifiableDomainConnection" class="svelte-1y48hv4">VerifiableDomainConnection</a>
+            </p><p>email
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>estimatedNextSponsorsPayoutInCents
+                
+                : 
+                <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a>!
+            </p><p>hasSponsorsListing
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>id
+                
+                : 
+                <a href="/examples/github/ID" class="svelte-1y48hv4">ID</a>!
+            </p><p>interactionAbility
+                
+                : 
+                <a href="/examples/github/RepositoryInteractionAbility" class="svelte-1y48hv4">RepositoryInteractionAbility</a>
+            </p><p>ipAllowListEnabledSetting
+                
+                : 
+                <a href="/examples/github/IpAllowListEnabledSettingValue" class="svelte-1y48hv4">IpAllowListEnabledSettingValue</a>!
+            </p><p>ipAllowListEntries
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>orderBy: <a href="/examples/github/IpAllowListEntryOrder" class="svelte-1y48hv4">IpAllowListEntryOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/IpAllowListEntryConnection" class="svelte-1y48hv4">IpAllowListEntryConnection</a>!
+            </p><p>ipAllowListForInstalledAppsEnabledSetting
+                
+                : 
+                <a href="/examples/github/IpAllowListForInstalledAppsEnabledSettingValue" class="svelte-1y48hv4">IpAllowListForInstalledAppsEnabledSettingValue</a>!
+            </p><p>isSponsoredBy
+                (<br>
+                           <span>accountLogin: <a href="/examples/github/String" class="svelte-1y48hv4">String</a>!</span><br>
+                )
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>isSponsoringViewer
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>isVerified
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>itemShowcase
+                
+                : 
+                <a href="/examples/github/ProfileItemShowcase" class="svelte-1y48hv4">ProfileItemShowcase</a>!
+            </p><p>location
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>login
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>!
+            </p><p>memberStatuses
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>orderBy: <a href="/examples/github/UserStatusOrder" class="svelte-1y48hv4">UserStatusOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/UserStatusConnection" class="svelte-1y48hv4">UserStatusConnection</a>!
+            </p><p>membersCanForkPrivateRepositories
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>membersWithRole
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/OrganizationMemberConnection" class="svelte-1y48hv4">OrganizationMemberConnection</a>!
+            </p><p>monthlyEstimatedSponsorsIncomeInCents
+                
+                : 
+                <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a>!
+            </p><p>name
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>newTeamResourcePath
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>newTeamUrl
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>notificationDeliveryRestrictionEnabledSetting
+                
+                : 
+                <a href="/examples/github/NotificationRestrictionSettingValue" class="svelte-1y48hv4">NotificationRestrictionSettingValue</a>!
+            </p><p>organizationBillingEmail
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>packages
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>names: [<a href="/examples/github/String" class="svelte-1y48hv4">String</a>]</span><br>
+                           <span>repositoryId: <a href="/examples/github/ID" class="svelte-1y48hv4">ID</a></span><br>
+                           <span>packageType: <a href="/examples/github/PackageType" class="svelte-1y48hv4">PackageType</a></span><br>
+                           <span>orderBy: <a href="/examples/github/PackageOrder" class="svelte-1y48hv4">PackageOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/PackageConnection" class="svelte-1y48hv4">PackageConnection</a>!
+            </p><p>pendingMembers
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/UserConnection" class="svelte-1y48hv4">UserConnection</a>!
+            </p><p>pinnableItems
+                (<br>
+                           <span>types: [<a href="/examples/github/PinnableItemType" class="svelte-1y48hv4">PinnableItemType</a>!]</span><br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/PinnableItemConnection" class="svelte-1y48hv4">PinnableItemConnection</a>!
+            </p><p>pinnedItems
+                (<br>
+                           <span>types: [<a href="/examples/github/PinnableItemType" class="svelte-1y48hv4">PinnableItemType</a>!]</span><br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/PinnableItemConnection" class="svelte-1y48hv4">PinnableItemConnection</a>!
+            </p><p>pinnedItemsRemaining
+                
+                : 
+                <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a>!
+            </p><p>project
+                (<br>
+                           <span>number: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a>!</span><br>
+                )
+                : 
+                <a href="/examples/github/Project" class="svelte-1y48hv4">Project</a>
+            </p><p>projectNext
+                (<br>
+                           <span>number: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a>!</span><br>
+                )
+                : 
+                <a href="/examples/github/ProjectNext" class="svelte-1y48hv4">ProjectNext</a>
+            </p><p>projects
+                (<br>
+                           <span>orderBy: <a href="/examples/github/ProjectOrder" class="svelte-1y48hv4">ProjectOrder</a></span><br>
+                           <span>search: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>states: [<a href="/examples/github/ProjectState" class="svelte-1y48hv4">ProjectState</a>!]</span><br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/ProjectConnection" class="svelte-1y48hv4">ProjectConnection</a>!
+            </p><p>projectsNext
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>query: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>sortBy: <a href="/examples/github/ProjectNextOrderField" class="svelte-1y48hv4">ProjectNextOrderField</a></span><br>
+                )
+                : 
+                <a href="/examples/github/ProjectNextConnection" class="svelte-1y48hv4">ProjectNextConnection</a>!
+            </p><p>projectsResourcePath
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>projectsUrl
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>repositories
+                (<br>
+                           <span>privacy: <a href="/examples/github/RepositoryPrivacy" class="svelte-1y48hv4">RepositoryPrivacy</a></span><br>
+                           <span>orderBy: <a href="/examples/github/RepositoryOrder" class="svelte-1y48hv4">RepositoryOrder</a></span><br>
+                           <span>affiliations: [<a href="/examples/github/RepositoryAffiliation" class="svelte-1y48hv4">RepositoryAffiliation</a>]</span><br>
+                           <span>ownerAffiliations: [<a href="/examples/github/RepositoryAffiliation" class="svelte-1y48hv4">RepositoryAffiliation</a>]</span><br>
+                           <span>isLocked: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>isFork: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                )
+                : 
+                <a href="/examples/github/RepositoryConnection" class="svelte-1y48hv4">RepositoryConnection</a>!
+            </p><p>repository
+                (<br>
+                           <span>name: <a href="/examples/github/String" class="svelte-1y48hv4">String</a>!</span><br>
+                           <span>followRenames: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                )
+                : 
+                <a href="/examples/github/Repository" class="svelte-1y48hv4">Repository</a>
+            </p><p>repositoryDiscussionComments
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>repositoryId: <a href="/examples/github/ID" class="svelte-1y48hv4">ID</a></span><br>
+                           <span>onlyAnswers: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                )
+                : 
+                <a href="/examples/github/DiscussionCommentConnection" class="svelte-1y48hv4">DiscussionCommentConnection</a>!
+            </p><p>repositoryDiscussions
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>orderBy: <a href="/examples/github/DiscussionOrder" class="svelte-1y48hv4">DiscussionOrder</a></span><br>
+                           <span>repositoryId: <a href="/examples/github/ID" class="svelte-1y48hv4">ID</a></span><br>
+                           <span>answered: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                )
+                : 
+                <a href="/examples/github/DiscussionConnection" class="svelte-1y48hv4">DiscussionConnection</a>!
+            </p><p>requiresTwoFactorAuthentication
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>
+            </p><p>resourcePath
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>samlIdentityProvider
+                
+                : 
+                <a href="/examples/github/OrganizationIdentityProvider" class="svelte-1y48hv4">OrganizationIdentityProvider</a>
+            </p><p>sponsoring
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>orderBy: <a href="/examples/github/SponsorOrder" class="svelte-1y48hv4">SponsorOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/SponsorConnection" class="svelte-1y48hv4">SponsorConnection</a>!
+            </p><p>sponsors
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>tierId: <a href="/examples/github/ID" class="svelte-1y48hv4">ID</a></span><br>
+                           <span>orderBy: <a href="/examples/github/SponsorOrder" class="svelte-1y48hv4">SponsorOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/SponsorConnection" class="svelte-1y48hv4">SponsorConnection</a>!
+            </p><p>sponsorsActivities
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>period: <a href="/examples/github/SponsorsActivityPeriod" class="svelte-1y48hv4">SponsorsActivityPeriod</a></span><br>
+                           <span>orderBy: <a href="/examples/github/SponsorsActivityOrder" class="svelte-1y48hv4">SponsorsActivityOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/SponsorsActivityConnection" class="svelte-1y48hv4">SponsorsActivityConnection</a>!
+            </p><p>sponsorsListing
+                
+                : 
+                <a href="/examples/github/SponsorsListing" class="svelte-1y48hv4">SponsorsListing</a>
+            </p><p>sponsorshipForViewerAsSponsor
+                
+                : 
+                <a href="/examples/github/Sponsorship" class="svelte-1y48hv4">Sponsorship</a>
+            </p><p>sponsorshipForViewerAsSponsorable
+                
+                : 
+                <a href="/examples/github/Sponsorship" class="svelte-1y48hv4">Sponsorship</a>
+            </p><p>sponsorshipNewsletters
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>orderBy: <a href="/examples/github/SponsorshipNewsletterOrder" class="svelte-1y48hv4">SponsorshipNewsletterOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/SponsorshipNewsletterConnection" class="svelte-1y48hv4">SponsorshipNewsletterConnection</a>!
+            </p><p>sponsorshipsAsMaintainer
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>includePrivate: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                           <span>orderBy: <a href="/examples/github/SponsorshipOrder" class="svelte-1y48hv4">SponsorshipOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/SponsorshipConnection" class="svelte-1y48hv4">SponsorshipConnection</a>!
+            </p><p>sponsorshipsAsSponsor
+                (<br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>orderBy: <a href="/examples/github/SponsorshipOrder" class="svelte-1y48hv4">SponsorshipOrder</a></span><br>
+                )
+                : 
+                <a href="/examples/github/SponsorshipConnection" class="svelte-1y48hv4">SponsorshipConnection</a>!
+            </p><p>team
+                (<br>
+                           <span>slug: <a href="/examples/github/String" class="svelte-1y48hv4">String</a>!</span><br>
+                )
+                : 
+                <a href="/examples/github/Team" class="svelte-1y48hv4">Team</a>
+            </p><p>teams
+                (<br>
+                           <span>privacy: <a href="/examples/github/TeamPrivacy" class="svelte-1y48hv4">TeamPrivacy</a></span><br>
+                           <span>role: <a href="/examples/github/TeamRole" class="svelte-1y48hv4">TeamRole</a></span><br>
+                           <span>query: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>userLogins: [<a href="/examples/github/String" class="svelte-1y48hv4">String</a>!]</span><br>
+                           <span>orderBy: <a href="/examples/github/TeamOrder" class="svelte-1y48hv4">TeamOrder</a></span><br>
+                           <span>ldapMapped: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                           <span>rootTeamsOnly: <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a></span><br>
+                           <span>after: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>before: <a href="/examples/github/String" class="svelte-1y48hv4">String</a></span><br>
+                           <span>first: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                           <span>last: <a href="/examples/github/Int" class="svelte-1y48hv4">Int</a></span><br>
+                )
+                : 
+                <a href="/examples/github/TeamConnection" class="svelte-1y48hv4">TeamConnection</a>!
+            </p><p>teamsResourcePath
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>teamsUrl
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>twitterUsername
+                
+                : 
+                <a href="/examples/github/String" class="svelte-1y48hv4">String</a>
+            </p><p>updatedAt
+                
+                : 
+                <a href="/examples/github/DateTime" class="svelte-1y48hv4">DateTime</a>!
+            </p><p>url
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>!
+            </p><p>viewerCanAdminister
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerCanChangePinnedItems
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerCanCreateProjects
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerCanCreateRepositories
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerCanCreateTeams
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerCanSponsor
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerIsAMember
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>viewerIsSponsoring
+                
+                : 
+                <a href="/examples/github/Boolean" class="svelte-1y48hv4">Boolean</a>!
+            </p><p>websiteUrl
+                
+                : 
+                <a href="/examples/github/URI" class="svelte-1y48hv4">URI</a>
+            </p>
+
+</div>
+	</body>
+</html>
