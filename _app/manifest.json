@@ -1,6 +1,6 @@
 {
   ".svelte-kit/build/runtime/internal/start.js": {
-    "file": "start-c5f17061.js",
+    "file": "start-d3e1c811.js",
     "src": ".svelte-kit/build/runtime/internal/start.js",
     "isEntry": true,
     "imports": [
@@ -46,7 +46,7 @@
     ]
   },
   "src/routes/examples/github/index.svelte": {
-    "file": "pages/examples/github/index.svelte-7d5ec388.js",
+    "file": "pages/examples/github/index.svelte-53e6f11a.js",
     "src": "src/routes/examples/github/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -57,14 +57,14 @@
     ]
   },
   "src/routes/examples/github/[typeName].svelte": {
-    "file": "pages/examples/github/_typeName_.svelte-5078d588.js",
+    "file": "pages/examples/github/_typeName_.svelte-f980a2fe.js",
     "src": "src/routes/examples/github/[typeName].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_vendor-1a106b99.js",
-      "_paths-28a87002.js",
-      "_githubIntrospectionStore-afa31460.js"
+      "_githubIntrospectionStore-afa31460.js",
+      "_paths-28a87002.js"
     ]
   },
   "_vendor-1a106b99.js": {
