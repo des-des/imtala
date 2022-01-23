@@ -1,10 +1,10 @@
 <script context='module' lang='ts'>
     import introspectionStore, {StoreState} from '../lib/stores/introspectionQueryStore'
-    import GraphQlRoot from '../lib/components/GqlDocumentation.svelte'
+    import QueryBuilder from '../lib/components/QueryBuilder.svelte'
     import { getIntrospectionQuery } from 'graphql';
 
     /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch, page }) {
+	export async function load({ fetch }) {
         await introspectionStore.init(() =>
             fetch('/graphql', {
                 method: 'POST',
@@ -18,26 +18,28 @@
         )
 
         return {
-            props: {
-                typeName: page.params.typeName,
-            }
+            props: {}
         }
     }
 </script>
 
 <script lang='ts'>
+    import {print} from 'graphql'
     let introspectionRequest: StoreState;
     
     introspectionStore.subscribe((introspectionState) => {
         introspectionRequest = introspectionState
     })
 
-	export let typeName: string;
+    let ast;
+
+
 </script>
 
 <svelte:head>
-    <title>{typeName}</title>
+    <title>Root types</title>
 </svelte:head>
+
 
 {#if !introspectionRequest || introspectionRequest.kind === 'initialising'}
   <span>LOADING</span>
@@ -47,5 +49,27 @@
         {JSON.stringify(introspectionRequest.error, null, 4)}
     </pre>
 {:else}
-    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery} typeName={typeName}/>
+    <div class='wrapper'>
+        <div style='max-width: 50vw; max-height: 100vh; overflow-y: scroll; padding-right: 2rem;'>
+            <QueryBuilder
+                onUpdateAst={newAst => {ast = newAst}}
+                typeName='Query'
+                fieldName='query'
+                introspectionQuery={introspectionRequest.introspectionQuery.data}
+            />
+        </div>
+        <div style="border-left: 1px solid white; padding-left: 2rem;">
+            <pre style='font-size: 1rem;'>
+                {print(ast)}
+            </pre>
+        </div>
+    </div>
+    
 {/if}
+
+<style>
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+</style>

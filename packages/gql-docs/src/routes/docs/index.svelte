@@ -1,6 +1,6 @@
 <script context='module' lang='ts'>
-    import introspectionStore, {StoreState} from '../lib/stores/introspectionQueryStore'
-    import GraphQlRoot from '../lib/components/GqlDocumentation.svelte'
+    import introspectionStore, {StoreState} from '../../lib/stores/introspectionQueryStore'
+    import GraphQlRoot from '../../lib/components/GqlDocumentation.svelte'
     import { getIntrospectionQuery } from 'graphql';
 
     /** @type {import('@sveltejs/kit').Load} */
@@ -30,6 +30,8 @@
         introspectionRequest = introspectionState
     })
 
+    console.log(introspectionRequest)
+
 </script>
 
 <svelte:head>
@@ -45,5 +47,5 @@
         {JSON.stringify(introspectionRequest.error, null, 4)}
     </pre>
 {:else}
-    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery}/>
+    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery.data} rootPath={'/docs'}/>
 {/if}
