@@ -12,15 +12,15 @@
 <style>
     a {
         text-decoration: none;
-        color: var(--green-glitter)
+        color: var(--lime-1)
     }
 
     a:visited {
-        color: var(--endo);
+        color: var(--lime-5);
     }
 
     a:hover {
-        background-color: var(--loon-turquoise);
+        background-color: var(--lime-8);
     }
 </style>
 

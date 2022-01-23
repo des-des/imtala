@@ -21,6 +21,8 @@
     $: fields = fieldMap && Object.keys(fieldMap).map(k => fieldMap[k])
     $: title = typeof typeName === 'string' ? typeName : 'Root types';
 
+    console.log(fields)
+
 </script>
 <svelte:head>
     <title>
@@ -70,6 +72,11 @@
 
     {#if pageType instanceof GraphQLUnionType}
         <h2>Possible Types</h2>
+        <ul>
+            {#each schema.getPossibleTypes(pageType) as possibleType}
+                <li><TypeLink type={possibleType} rootPath={rootPath}/></li>
+            {/each}
+        </ul>
     {:else if pageType instanceof GraphQLEnumType}
         <h2>Possible Values</h2>
         <ul>

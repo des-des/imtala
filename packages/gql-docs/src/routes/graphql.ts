@@ -1,30 +1,12 @@
+import ghApi from './github_introspection.json'
+
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post({ body }) {
-
-    const response = await fetch('http://localhost:4000/graphql', {
-        method: 'POST',
-        body: body.query,
-        headers: {
-            'content-type': 'application/graphql'
-        }
-    });
-
-    const payload = await response.json()
-
-    if (payload.errors) {
-        console.log({body})
-        for (let error of payload.errors) {
-            console.error(error)
-        }
-    }
-
-
     return {
-        body: payload.data,
-        status: response.status,
+        body: ghApi,
+        status: 200,
         headers: {
             ['content-type']: 'application/json',
         }
     };
-	
 }
