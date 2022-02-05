@@ -32,7 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@imtala/gql-docs": "workspace:1.0.3",
+		"@imtala/gql-docs": "workspace:1.0.4",
 		"@sveltejs/adapter-static": "^1.0.0-next.24",
 		"graphql": "^16.2.0"
 	}
