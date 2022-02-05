@@ -27,7 +27,7 @@ importers:
     dependencies:
       graphql: 16.2.0
     devDependencies:
-      '@sveltejs/adapter-auto': 1.0.0-next.7
+      '@sveltejs/adapter-auto': 1.0.0-next.9
       '@sveltejs/adapter-static': 1.0.0-next.23
       '@sveltejs/kit': 1.0.0-next.215_svelte@3.44.3
       '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
@@ -48,7 +48,7 @@ importers:
     specifiers:
       '@sveltejs/adapter-auto': next
       '@sveltejs/adapter-static': ^1.0.0-next.23
-      '@sveltejs/kit': next
+      '@sveltejs/kit': ^1.0.0-next.215
       '@typescript-eslint/eslint-plugin': ^4.31.1
       '@typescript-eslint/parser': ^4.31.1
       eslint: ^7.32.0
@@ -66,7 +66,7 @@ importers:
     dependencies:
       graphql: 16.2.0
     devDependencies:
-      '@sveltejs/adapter-auto': 1.0.0-next.7
+      '@sveltejs/adapter-auto': 1.0.0-next.9
       '@sveltejs/adapter-static': 1.0.0-next.24
       '@sveltejs/kit': 1.0.0-next.215_svelte@3.44.3
       '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
@@ -83,9 +83,44 @@ importers:
       tslib: 2.3.1
       typescript: 4.5.4
 
+  packages/query-builder:
+    specifiers:
+      '@imtala/gql-docs': workspace:^1.0.4
+      '@sveltejs/adapter-auto': next
+      '@sveltejs/kit': next
+      '@typescript-eslint/eslint-plugin': ^4.31.1
+      '@typescript-eslint/parser': ^4.31.1
+      eslint: ^7.32.0
+      eslint-config-prettier: ^8.3.0
+      eslint-plugin-svelte3: ^3.2.1
+      prettier: ^2.4.1
+      prettier-plugin-svelte: ^2.4.0
+      svelte: ^3.44.0
+      svelte-check: ^2.2.6
+      svelte-preprocess: ^4.9.4
+      tslib: ^2.3.1
+      typescript: ^4.4.3
+    dependencies:
+      '@imtala/gql-docs': link:../gql-docs/package
+    devDependencies:
+      '@sveltejs/adapter-auto': 1.0.0-next.9
+      '@sveltejs/kit': 1.0.0-next.217_svelte@3.44.3
+      '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
+      '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
+      eslint: 7.32.0
+      eslint-config-prettier: 8.3.0_eslint@7.32.0
+      eslint-plugin-svelte3: 3.2.1_eslint@7.32.0+svelte@3.44.3
+      prettier: 2.5.1
+      prettier-plugin-svelte: 2.5.1_prettier@2.5.1+svelte@3.44.3
+      svelte: 3.44.3
+      svelte-check: 2.2.11_svelte@3.44.3
+      svelte-preprocess: 4.10.1_svelte@3.44.3+typescript@4.5.4
+      tslib: 2.3.1
+      typescript: 4.5.4
+
   packages/site-gql-docs:
     specifiers:
-      '@imtala/gql-docs': workspace:1.0.3
+      '@imtala/gql-docs': workspace:1.0.4
       '@sveltejs/adapter-auto': next
       '@sveltejs/adapter-static': ^1.0.0-next.24
       '@sveltejs/kit': next
@@ -109,8 +144,8 @@ importers:
       '@sveltejs/adapter-static': 1.0.0-next.24
       graphql: 16.2.0
     devDependencies:
-      '@sveltejs/adapter-auto': 1.0.0-next.7
-      '@sveltejs/kit': 1.0.0-next.215_svelte@3.44.3
+      '@sveltejs/adapter-auto': 1.0.0-next.9
+      '@sveltejs/kit': 1.0.0-next.217_svelte@3.44.3
       '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
       eslint: 7.32.0
@@ -213,16 +248,16 @@ packages:
       picomatch: 2.3.0
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.7:
-    resolution: {integrity: sha512-PGuTgW6bdzKgJJy8a12OCN9ob7/I8ixfWjbBVpKpbjHGc5NmNcS70LoTU55BgVTI7ELp9VoZaJsGFoYp+X5WEw==}
+  /@sveltejs/adapter-auto/1.0.0-next.9:
+    resolution: {integrity: sha512-dx3NgDHIG7DdhjiAnAE7vLRf9odON0J3AEMFiTpIBf3nmnwmX6Xqxtr4Ai09Sjo23sWnMRFU/flqf6V6otigBA==}
     dependencies:
-      '@sveltejs/adapter-cloudflare': 1.0.0-next.5
+      '@sveltejs/adapter-cloudflare': 1.0.0-next.6
       '@sveltejs/adapter-netlify': 1.0.0-next.37
-      '@sveltejs/adapter-vercel': 1.0.0-next.34
+      '@sveltejs/adapter-vercel': 1.0.0-next.35
     dev: true
 
-  /@sveltejs/adapter-cloudflare/1.0.0-next.5:
-    resolution: {integrity: sha512-I7kLcINJz0zik+ufb+IAWSn/EHxdTdmGF0M3tizd87Cxw2ke7N/A6XF8YrYDgZ/4yrAcZnR8Texas/5WxPYZ6g==}
+  /@sveltejs/adapter-cloudflare/1.0.0-next.6:
+    resolution: {integrity: sha512-31Ercf8jMLXpMzblrWNraCvfJ1+32+/ahnpaZcX0VTEukkZlS1cIl506m/skuK8Us67bY5CC8P07jjsv4yUEeg==}
     dependencies:
       esbuild: 0.13.15
     dev: true
@@ -246,14 +281,33 @@ packages:
     dependencies:
       tiny-glob: 0.2.9
 
-  /@sveltejs/adapter-vercel/1.0.0-next.34:
-    resolution: {integrity: sha512-TQDQK2wjDQkoSkNVuFVu4a/hzqKIWCGL15Zi7zQv740ZSd6F2Lg9QHlFfEXMglu6mhoep084h6JiLtzavNiZeA==}
+  /@sveltejs/adapter-vercel/1.0.0-next.35:
+    resolution: {integrity: sha512-juh74OesfWUo2EFThOIXX4I/9MJBGpDK3+reYc/R6slPxLLEVIZDV7TcAc2yldSGgMDCUbQg7nmXjF098IT1NQ==}
     dependencies:
       esbuild: 0.13.15
     dev: true
 
   /@sveltejs/kit/1.0.0-next.215_svelte@3.44.3:
     resolution: {integrity: sha512-3y6NFKacahEjgAuGNgs49t2Jf708syKEf6A7uf0dXoQXq3giF+/O1XDF4f+I2g/39iiOtkJMW10tyvIiRG22Hw==}
+    engines: {node: '>=14.13'}
+    hasBin: true
+    peerDependencies:
+      svelte: ^3.44.0
+    dependencies:
+      '@sveltejs/vite-plugin-svelte': 1.0.0-next.32_svelte@3.44.3+vite@2.7.8
+      sade: 1.7.4
+      svelte: 3.44.3
+      vite: 2.7.8
+    transitivePeerDependencies:
+      - diff-match-patch
+      - less
+      - sass
+      - stylus
+      - supports-color
+    dev: true
+
+  /@sveltejs/kit/1.0.0-next.217_svelte@3.44.3:
+    resolution: {integrity: sha512-fWBFRstHIgrY+GYe3YRe3anXZn8TlaQpowEI0W7lijZI/4HTN8pdyIIMdip55yU1AEKTRIPbg3wwaUsUKxjpmQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
