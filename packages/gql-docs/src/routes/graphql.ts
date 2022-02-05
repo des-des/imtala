@@ -1,7 +1,7 @@
 import ghApi from './github_introspection.json'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post({ body }) {
+export async function post() {
     return {
         body: ghApi,
         status: 200,

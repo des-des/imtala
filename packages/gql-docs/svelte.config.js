@@ -30,17 +30,6 @@ const config = {
 		adapter: adapter({
 			precompress: true,
 		}),
-
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
-
-		vite: {
-			server: {
-				fs: {
-					allow: ['README.md']
-				}
-			}
-		}
 	}
 };
 
