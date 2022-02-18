@@ -9,21 +9,6 @@
     export let rootPath: string;
 </script>
 
-<style>
-    a {
-        text-decoration: none;
-        color: var(--lime-1)
-    }
-
-    a:visited {
-        color: var(--lime-5);
-    }
-
-    a:hover {
-        background-color: var(--lime-8);
-    }
-</style>
-
 
 
 {#if type instanceof GraphQLNonNull}

@@ -1,7 +1,7 @@
 <script context='module' lang='ts'>
     import introspectionStore, {StoreState} from '../lib/stores/introspectionQueryStore'
     import QueryBuilder from '../lib/components/QueryBuilder.svelte'
-    import { getIntrospectionQuery } from 'graphql';
+    import { getIntrospectionQuery, Kind, OperationDefinitionNode, OperationTypeNode } from 'graphql';
 
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
@@ -31,7 +31,16 @@
         introspectionRequest = introspectionState
     })
 
-    let ast;
+	// type AstRoot = FieldNode | OperationDefinitionNode;
+
+    let ast: OperationDefinitionNode = {
+		kind: Kind.OPERATION_DEFINITION,
+		operation: OperationTypeNode.QUERY,
+		selectionSet: {
+			kind: Kind.SELECTION_SET,
+			selections: []
+		}
+	};
 
 
 </script>
@@ -52,14 +61,14 @@
     <div class='wrapper'>
         <div style='max-width: 50vw; max-height: 100vh; overflow-y: scroll; padding-right: 2rem;'>
             <QueryBuilder
-                onUpdateAst={newAst => {ast = newAst}}
+                bind:ast={ast}
                 typeName='Query'
                 fieldName='query'
                 introspectionQuery={introspectionRequest.introspectionQuery.data}
             />
         </div>
         <div style="border-left: 1px solid white; padding-left: 2rem;">
-            <pre style='font-size: 1rem;'>
+            <pre style='font-size: 14px;'>
                 {print(ast)}
             </pre>
         </div>

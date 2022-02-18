@@ -10,11 +10,17 @@
 		Kind,
 		isInterfaceType,
 		OperationDefinitionNode,
-		OperationTypeNode,
 		SelectionSetNode,
 		SelectionNode,
 		GraphQLField,
-		GraphQLUnionType
+		GraphQLUnionType,
+		GraphQLArgument,
+		GraphQLScalarType,
+		GraphQLEnumType,
+		GraphQLInputObjectType,
+		GraphQLList,
+		GraphQLNonNull,
+		ValueNode
 	} from 'graphql';
 
 	import type { IntrospectionQuery } from 'graphql';
@@ -22,6 +28,8 @@
 	export let fieldName: string;
 	export let schemaField: GraphQLField<any, any, any>;
 	export let removeSelf;
+
+	import QueryArgumentEditor from './QueryArgumentEditor.svelte';
 
 	const createSelectionNode = (name: string): FieldNode => ({
 		kind: Kind.FIELD,
@@ -31,26 +39,6 @@
 		}
 	});
 
-	type InteractiveArgumentNode = ArgumentNode & {
-		interactive: {
-			editing: boolean;
-		};
-	};
-
-	const createArgumentNode = (name: string): InteractiveArgumentNode => ({
-		kind: Kind.ARGUMENT,
-		name: {
-			kind: Kind.NAME,
-			value: name
-		},
-		value: {
-			kind: Kind.STRING,
-			value: ''
-		},
-		interactive: {
-			editing: true
-		}
-	});
 
 	const resolvesTo = (type: GraphQLType): string =>
 		'ofType' in type ? resolvesTo(type.ofType) : type.name;
@@ -60,42 +48,28 @@
 
 	type AstRoot = FieldNode | OperationDefinitionNode;
 
-	export let onUpdateAst
-
-	export let ast: AstRoot = {
-		kind: Kind.OPERATION_DEFINITION,
-		operation: OperationTypeNode.QUERY,
-		selectionSet: {
-			kind: Kind.SELECTION_SET,
-			selections: []
-		}
-	};
-
-	if (onUpdateAst) {
-		onUpdateAst(ast)
-	}
+	export let ast: AstRoot;
 
 
-	export let updateAst = (update: (node: AstRoot) => AstRoot) => {
+	let updateAst = (update: (node: AstRoot) => AstRoot) => {
 		ast = update(ast);
-		if (onUpdateAst) {
-			onUpdateAst(ast)			
-		}
 	};
 
 	const schema = buildClientSchema(introspectionQuery as never as IntrospectionQuery);
 	const pageType = schema.getType(typeName);
 	const gqlFieldMap = (isObjectType(pageType) || isInterfaceType(pageType) || isInputObjectType(pageType)) && pageType.getFields();
 	const fields = Object.keys(gqlFieldMap).map((k) => gqlFieldMap[k]);
-
+	$: argMap = schemaField && schemaField.args.reduce<{[k: string]: GraphQLArgument}>((acc, arg) => {
+		acc[arg.name] = arg
+		return acc
+	}, {})
 	$: astSelections = ast.selectionSet && ast.selectionSet.selections || [];
 	$: items = [...astSelections, ...fields];
 
-	let argumentEditIndex;
 	export let isDocumentFocus = true;
 
 	export let setDocumentFocus = (v: boolean) => {
-		isDocumentFocus = v;
+		isDocumentFocus = true;
 	}
 
 	$: handleUpdateSelectionSet = (update: ((sS: SelectionSetNode) => SelectionSetNode)) => {
@@ -123,7 +97,6 @@
 			typeName: childTypeName,
 			schemaField: gqlFieldMap[fieldNode.name.value],
 			fieldName: gqlFieldMap[fieldNode.name.value].name,
-			ast: fieldNode,
 			introspectionQuery,
 			isDocumentFocus,
 			setDocumentFocus,
@@ -131,18 +104,6 @@
 				...selectionSet,
 				selections: selectionSet.selections.filter(s => s !== selectionNode)
 			})),
-			updateAst: (update) => {
-				console.log('child calling into parent')
-				updateAst((ast) => ({
-					...ast,
-					selectionSet: {
-						...ast.selectionSet,
-						selections: ast.selectionSet.selections.map<SelectionNode>((selection) =>
-							selection === fieldNode ? update(selection) : selection
-						)
-					}
-				}))
-			}
 		};
 	};
 </script>
@@ -151,7 +112,6 @@
 	<title>Query builder</title>
 </svelte:head>
 
-
 <li on:click={removeSelf} class='field'>
 	{#if pageType instanceof GraphQLUnionType}
 		<span class='{maybeInteractiveRemove}' style="color: #bbbbbb">{fieldName} - Querying on Union types is not yet supported, please create a feature request</span>
@@ -159,87 +119,15 @@
 	<span class='selected-option {maybeInteractiveRemove}'>{fieldName}</span>
 	{/if}
 	{#if 'arguments' in ast}
-		&nbsp;<span style="flex-grow: 1;" class='selected-option {maybeInteractiveRemove}'>(</span>
-		{#if 'arguments' in ast && ast.arguments.length > 0}
-			{#each ast.arguments as astArgument, astArgumentIndex}
-				<div
-					style="flex-basis: 100%;"
-					class="{maybeInteractiveAdd} selected-option"
-					on:click={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
-					}}
-				>
-					&nbsp; &nbsp; {astArgument.name.value}: 
-					{#if astArgumentIndex === argumentEditIndex}
-						{#if astArgument.value.kind === Kind.VARIABLE}
-							VARIABLE NOT SUPPORTED
-						{:else if astArgument.value.kind === Kind.NULL}
-							NULL NOT SUPPORTED
-						{:else if astArgument.value.kind === Kind.LIST}
-							LIST NOT SUPPORTED
-						{:else if astArgument.value.kind === Kind.OBJECT}
-							OBJECT NOT SUPPORTED
-						{:else}
-							<input
-								autofocus
-								bind:value={astArgument.value.value}
-								on:keydown={(e) => {
-									if (e.code === 'Enter') {
-										setDocumentFocus(true);
-										argumentEditIndex = undefined;
-									}
-								}}
-							/>
-						{/if}
-					
-					{:else}
-						<span
-							on:click={e => {
-								e.preventDefault();
-								e.stopPropagation();
-
-								argumentEditIndex = astArgumentIndex;
-								setDocumentFocus(false);
-							}}
-						>
-							{#if astArgument.value.kind === Kind.VARIABLE}
-								VARIABLE NOT SUPPORTED
-							{:else if astArgument.value.kind === Kind.NULL}
-								NULL NOT SUPPORTED
-							{:else if astArgument.value.kind === Kind.LIST}
-								LIST NOT SUPPORTED
-							{:else if astArgument.value.kind === Kind.OBJECT}
-								OBJECT NOT SUPPORTED
-							{:else}
-								{astArgument.value.value}
-							{/if}
-						</span>
-					{/if}
-				</div>
+		(<ul>
+			{#each schemaField.args as schemaArg}
+				<QueryArgumentEditor
+					fieldName={schemaArg.name}
+					schema={schemaArg.type}
+					bind:astParent={ast}
+				/>
 			{/each}
-		{/if}
-		{#each schemaField.args as schemaArg}
-			{#if ast.arguments.every((astArg) => astArg.name.value !== schemaArg.name)}
-				<div
-					style="flex-basis: 100%;"
-					class="{maybeInteractiveAdd} unselected-option"
-					on:click={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
-						setDocumentFocus(false);
-						argumentEditIndex = 'arguments' in ast ? ast.arguments.length : 0
-						updateAst(ast => ({
-							...ast,
-							arguments: (('arguments' in ast) ? ast.arguments : []).concat(createArgumentNode(schemaArg.name))
-						}))
-					}}
-				>
-					&nbsp; &nbsp; {schemaArg.name}: {resolvesTo(schemaArg.type)}
-				</div>
-			{/if}
-		{/each}
-		)
+		</ul> <span class='selected-option action-remove'>)</span>
 	{:else if schemaField && 'args' in schemaField && schemaField.args.length > 0}
 		<span
 			class="selected-option {maybeInteractiveAdd}"
@@ -263,9 +151,10 @@
 {#if items.length !== 0}
 	<ul style="margin-top: 0;">
 		{#if astSelections.length !== 0}
-			{#each astSelections as selection}
+			{#each astSelections as selection, selectionIndex}
 				<svelte:self
 					{...generateChildProps(selection)}
+					bind:ast={astSelections[selectionIndex]}
 				/>
 			{/each}
 		{/if}
@@ -289,54 +178,3 @@
 {#if fields.length > 0}
 	<span class='selected-option {maybeInteractiveRemove}' style='display: block;'>{'}'}</span>
 {/if}
-
-<style>
-
-	.field {
-		display: flex;
-		flex-wrap: wrap;
-	}
-	li {
-		list-style-type: none;
-	}
-
-	.selected-option {
-		color: var(--lime-2);
-		font-weight: bold;
-	}
-
-	.unselected-option {
-		color: var(--lime-4);
-	}
-
-	.action-add {
-		cursor: pointer;
-	}
-	.action-add:hover {
-		background-color: var(--lime-8);
-	}
-
-	.action-remove {
-		cursor: pointer;
-	}
-	.action-remove:hover {
-		background-color: var(--action-remove);
-	}
-
-	.interactive {
-		cursor: pointer;
-	}
-
-	.interactive:hover {
-		background-color: var(--lime-8);
-	}
-
-	input {
-		font-family: 'Noto Sans Mono', monospace;
-		outline: none;
-		background-color: var(--lime-8);
-		border: none;
-		font-size: 14px;
-		color: var(--lime-2);
-	}
-</style>
