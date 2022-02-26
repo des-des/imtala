@@ -6,15 +6,14 @@
     } from 'graphql';
 
     export let type: GraphQLType | null | undefined;
-    export let rootPath: string;
 </script>
 
 
 
 {#if type instanceof GraphQLNonNull}
-    <svelte:self type={type.ofType} rootPath={rootPath}/>!
+    <svelte:self type={type.ofType}/>!
 {:else if type instanceof GraphQLList}
-    [<svelte:self type={type.ofType} rootPath={rootPath}/>]
+    [<svelte:self type={type.ofType}/>]
 {:else}
-<a href={`${rootPath}/${type.name}`}>{type.name}</a>
+<a href={`${type.name}`}>{type.name}</a>
 {/if}

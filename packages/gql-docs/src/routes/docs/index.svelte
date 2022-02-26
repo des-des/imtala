@@ -47,5 +47,5 @@
         {JSON.stringify(introspectionRequest.error, null, 4)}
     </pre>
 {:else}
-    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery.data} rootPath={'/docs'}/>
+    <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery.data}/>
 {/if}

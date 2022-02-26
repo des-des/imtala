@@ -8,7 +8,6 @@
     } from 'graphql';
     import type { IntrospectionQuery } from 'graphql'
     export let typeName: string = undefined;
-    export let rootPath: string;
     export let introspectionQuery: any;
     import TypeLink from './TypeLink.svelte'
 
@@ -42,7 +41,7 @@
             Query Type
         </h2>
 
-        <TypeLink type={queryType} rootPath={rootPath}/>
+        <TypeLink type={queryType}/>
     {/if}
 
     {#if mutationType}
@@ -50,7 +49,7 @@
             Mutation Type
         </h2>
 
-        <TypeLink type={mutationType} rootPath={rootPath}/>
+        <TypeLink type={mutationType}/>
     {/if}
 
     {#if subscriptionType}
@@ -58,7 +57,7 @@
             Subscription Type
         </h2>
 
-        <TypeLink type={subscriptionType} rootPath={rootPath}/>
+        <TypeLink type={subscriptionType}/>
     {/if}
 {:else}
     <h1>{typeName}</h1>
@@ -72,7 +71,7 @@
         <h2>Possible Types</h2>
         <ul>
             {#each schema.getPossibleTypes(pageType) as possibleType}
-                <li><TypeLink type={possibleType} rootPath={rootPath}/></li>
+                <li><TypeLink type={possibleType}/></li>
             {/each}
         </ul>
     {:else if pageType instanceof GraphQLEnumType}
@@ -86,14 +85,14 @@
         <h2>Implementations</h2>
         <ul>
             {#each schema.getPossibleTypes(pageType) as possibleType }
-                <li><TypeLink type={possibleType}  rootPath={rootPath}/></li>
+                <li><TypeLink type={possibleType}/></li>
             {/each}
         </ul>
     {:else if pageType instanceof GraphQLObjectType}
         <h2>Implements</h2>
         <ul>
             {#each pageType.getInterfaces() as implementsInterface}
-                <li><TypeLink type={implementsInterface}  rootPath={rootPath}/></li>
+                <li><TypeLink type={implementsInterface}/></li>
             {/each}
         </ul>
     {/if}
@@ -106,12 +105,12 @@
                 {field.name}
                 {#if 'args' in field && field.args.length}
                 (<br />{#each field.args as arg}
-                    &nbsp; &nbsp; &nbsp; &nbsp;<span>{arg.name}: <TypeLink type={arg.type} rootPath={rootPath}/></span><br />
+                    &nbsp; &nbsp; &nbsp; &nbsp;<span>{arg.name}: <TypeLink type={arg.type}/></span><br />
                 {/each}
                 )
                 {/if}
                 {': '}
-                <TypeLink type={field.type} rootPath={rootPath}/>
+                <TypeLink type={field.type}/>
             </p>
         {/each}
     {/if}
