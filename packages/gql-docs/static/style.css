@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600&display=swap');
+
+body,
+head {
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 15px;
+}
+
+:root {
+    --pink-8: #2e6874;
+    --pink-7: #423d83;
+    --pink-6: #271a26;
+    --action-remove: #977051;
+    --pink-4: #38121f;
+    --pink-3: #ca8174;
+    --pink-2: #d8ae77;
+    --pink-1: #d8e365;
+    --lime-1: #d8e365;
+    --lime-2: #c3d877;
+    --lime-3: #98ca74;
+    --lime-4: #81bd6f;
+    --lime-5: #64a960;
+    --lime-6: #4f9765;
+    --lime-7: #3d836b;
+    --lime-8: #2e6874;
+    --lime-9: #2e6874;
+}
+
+
+li {
+    list-style-type: none;
+}
+
+.selected-option {
+    color: var(--lime-2);
+    font-weight: bold;
+}
+
+.unselected-option {
+    color: var(--lime-4);
+}
+
+.action-add {
+    cursor: pointer;
+}
+
+.action-add:hover {
+    background-color: var(--lime-8);
+}
+
+.action-remove {
+    cursor: pointer;
+}
+
+.action-remove:hover {
+    background-color: var(--action-remove);
+}
+
+input,
+select {
+    font-family: 'Noto Sans Mono', monospace;
+    outline: none;
+    background-color: black;
+    padding: 0rem;
+
+    border: 1px solid var(--lime-2);
+    font-size: 14px;
+    color: var(--lime-2);
+}
+
+a {
+    text-decoration: none;
+    color: var(--lime-1)
+}
+
+a:visited {
+    color: var(--lime-5);
+}
+
+a:hover {
+    background-color: var(--lime-8);
+}

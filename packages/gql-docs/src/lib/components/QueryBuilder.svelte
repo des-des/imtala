@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {
-		ArgumentNode,
 		buildClientSchema,
 		FieldNode,
 		GraphQLType,
@@ -15,12 +14,6 @@
 		GraphQLField,
 		GraphQLUnionType,
 		GraphQLArgument,
-		GraphQLScalarType,
-		GraphQLEnumType,
-		GraphQLInputObjectType,
-		GraphQLList,
-		GraphQLNonNull,
-		ValueNode
 	} from 'graphql';
 
 	import type { IntrospectionQuery } from 'graphql';
