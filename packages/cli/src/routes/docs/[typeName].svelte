@@ -6,13 +6,10 @@
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch, params }) {
         await introspectionStore.init(() =>
-            fetch('./graphql.json', {
+            fetch('/docs/graphql.json', {
                 method: 'GET'
             })
         )
-
-        console.log({params})
-
         return {
             props: {
                 typeName: params.typeName === 'root' ? undefined : params.typeName,
@@ -44,4 +41,4 @@
     </pre>
 {:else}
     <GraphQlRoot introspectionQuery={introspectionRequest.introspectionQuery.data} typeName={typeName}/>
-{/if}
+{/if}   

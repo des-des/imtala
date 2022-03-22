@@ -2,10 +2,16 @@
   "name": "cli-v2",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "cli:build": "tsc src/cli",
-    "cli:run": "tsc src/cli/*.ts -m es2020 --moduleResolution node && node src/cli/index.js",
+    "start": "node dist/cli",
+    "start:github": "pnpm start -- serve --introspection-file ../gql-docs/src/routes/github_introspection.json",
+    "dev": "pnpm build && pnpm start:github",
+    "dev:svelte": "svelte-kit dev",
+    "build": "pnpm build:client && pnpm build:cli",
+    "build:cli": "tsc -p src/cli",
+    "server:run": "tsc -p src/cli && node src/cli/run-server.js",
+    "cli:run": "tsc -p src/cli && node src/cli-js/index.js",
     "svelte-site:build": "svelte-kit build",
+    "build:client": "echo \"server\" > .build_mode && svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "test": "playwright test",
@@ -17,7 +23,8 @@
   "devDependencies": {
     "@playwright/test": "^1.19.1",
     "@sveltejs/adapter-auto": "next",
-    "@sveltejs/kit": "^1.0.0-next.287",
+    "@sveltejs/kit": "^1.0.0-next.288",
+    "@types/koa": "^2.13.4",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "eslint": "^7.32.0",
@@ -34,8 +41,11 @@
   "type": "module",
   "dependencies": {
     "@imtala/gql-docs": "workspace:1.0.6",
+    "@sveltejs/adapter-node": "^1.0.0-next.70",
     "@sveltejs/adapter-static": "^1.0.0-next.28",
     "commander": "^9.0.0",
-    "graphql": "^16.2.0"
+    "graphql": "^16.2.0",
+    "koa": "^2.13.4",
+    "koa-connect": "^2.1.0"
   }
 }

@@ -6,14 +6,13 @@
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
         await introspectionStore.init(() =>
-            fetch('./graphql.json', {
+            fetch('/graphql.json', {
                 method: 'GET'
             })
         )
 
         return {
-            props: {
-            }
+            props: {}
         }
     }
 </script>
