@@ -1,5 +1,5 @@
-import ghApi from './edyn_introspection.json'
-// import ghApi from './github_introspection.json'
+// import ghApi from './edyn_introspection.json'
+import ghApi from './github_introspection.json'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post() {

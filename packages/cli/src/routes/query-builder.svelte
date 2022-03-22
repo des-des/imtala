@@ -7,17 +7,6 @@
 
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
-        // await introspectionStore.init(() =>
-        //     fetch('/graphql', {
-        //         method: 'POST',
-        //         headers: {
-        //             'content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             query: getIntrospectionQuery()
-        //         })
-        //     })
-        // )
         await introspectionStore.init(() =>
             fetch('/graphql.json', {
                 method: 'GET',
