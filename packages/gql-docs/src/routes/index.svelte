@@ -13,11 +13,28 @@
 		<li> > <a href="docs/root">Github GraphQL API documentation demo</a></li>
 		<li> > <a href="query-builder">Github GraphQL API interactive client</a></li>
 	</ol>
-
 	
 	<h2>Roadmap</h2>
 	<ol>
 		<li> > Execute querys against your api from within imtala</li>
 		<li> > Static website builder: Quickly build html views on top of your graphql query from within the web client; then emit a lightweight static website in a few clicks</li>
 	</ol>
+
+	Follow my <a href="https://twitter.com/eoin_des_des">twitter</a> for updates, or check back here.
 </main>
+
+<style>
+	main {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	@media (min-width: 700px) {
+		main {
+			border-left: 1px solid white;
+			padding-left: 15px;
+			margin: auto;
+			width: 600px
+		}
+	}
+
+</style>

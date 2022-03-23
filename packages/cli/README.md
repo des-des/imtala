@@ -6,6 +6,9 @@ Imtala in an interactive graphql client. It started as fun way to learn svelte a
   - The tree explorer / query builder interface feels less fiddly and easier to traverse than the one that comes with graphql. Have a go and let me know what you think.
   - The next piece of this is having it run in the background and hold connection information for multiple apis (staging / prod), and allow things like two factor auth, or fetching access tokens.
 
+
+There is a live example om the [website](https://imtala.com/).
+
 ## Usage
 
 ### Installation
@@ -66,3 +69,6 @@ Options:
   --introspection-file <filePath>  path of introspection file
   -h, --help                       display help for command
 ```
+
+
+Follow my [twitter](https://twitter.com/eoin_des_des) for updates, or check back here.
