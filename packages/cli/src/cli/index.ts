@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { program } from 'commander';
 import * as fs from 'fs'
 import * as path from 'path'
@@ -57,8 +59,9 @@ program
     // .option('-H, --gql-endpoint-headers <headers>', 'headers to attach to requests to the gql endpoint')
     .action((options) => {
         const __dirname = dirname(fileURLToPath(import.meta.url));
+        // ugh
         fs.writeFileSync(
-            path.join(__dirname, '..','..', 'src', 'routes', 'introspection.json'),
+            path.join(__dirname, '..','..', 'client', 'server', 'entries', 'endpoints', 'introspection.json'),
             fs.readFileSync(
                 path.join(process.cwd(), options.introspectionFile)
             ),

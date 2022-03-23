@@ -1,6 +1,6 @@
 {
   "name": "@imtala/gql-docs",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A svelte component that creates GraphQL documentation",
   "scripts": {
     "dev": "svelte-kit dev",
