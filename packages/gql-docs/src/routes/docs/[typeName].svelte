@@ -19,7 +19,7 @@
 
         return {
             props: {
-                typeName: params.typeName,
+                typeName: params.typeName === 'root' ? undefined : params.typeName,
             }
         }
     }

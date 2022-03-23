@@ -10,7 +10,7 @@
 
 	<h2>Demo</h2>
 	<ol>
-		<li> > <a href="docs">Github GraphQL API documentation demo</a></li>
+		<li> > <a href="docs/root">Github GraphQL API documentation demo</a></li>
 		<li> > <a href="query-builder">Github GraphQL API interactive client</a></li>
 	</ol>
 
