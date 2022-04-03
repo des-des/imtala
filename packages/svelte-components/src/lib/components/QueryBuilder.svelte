@@ -1,20 +1,23 @@
 <script lang="ts">
 	import {
 		buildClientSchema,
-		FieldNode,
-		GraphQLType,
 		isInputObjectType,
 		isObjectType,
 		isScalarType,
 		Kind,
 		isInterfaceType,
+		GraphQLUnionType
+	} from 'graphql';
+
+	import type {
+		FieldNode,
+		GraphQLType,
 		OperationDefinitionNode,
 		SelectionSetNode,
 		SelectionNode,
 		GraphQLField,
-		GraphQLUnionType,
-		GraphQLArgument,
-	} from 'graphql';
+		GraphQLArgument
+	} from 'graphql'
 
 	import type { IntrospectionQuery } from 'graphql';
 	export let introspectionQuery: any;
@@ -37,7 +40,6 @@
 		'ofType' in type ? resolvesTo(type.ofType) : type.name;
 	const resolvesToScalarType = (type: GraphQLType): boolean =>
 		'ofType' in type ? resolvesToScalarType(type.ofType) : isScalarType(type);
-	export let typeName: string = undefined;
 
 	type AstRoot = FieldNode | OperationDefinitionNode;
 
@@ -49,6 +51,7 @@
 	};
 
 	const schema = buildClientSchema(introspectionQuery as never as IntrospectionQuery);
+	export let typeName: string = schema.getQueryType().name;
 	const pageType = schema.getType(typeName);
 	const gqlFieldMap = (isObjectType(pageType) || isInterfaceType(pageType) || isInputObjectType(pageType)) && pageType.getFields();
 	const fields = Object.keys(gqlFieldMap).map((k) => gqlFieldMap[k]);

@@ -2,6 +2,9 @@
     import {
         GraphQLList,
         GraphQLNonNull,
+    } from 'graphql';
+
+    import type {
         GraphQLType,
     } from 'graphql';
 

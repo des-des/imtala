@@ -1,19 +1,23 @@
 <script lang='ts'>
-    import {
+    import type {
         ArgumentNode,
         FieldNode,
-        GraphQLEnumType,
         GraphQLField,
-        GraphQLInputObjectType,
         GraphQLInputType,
-        GraphQLList,
-        GraphQLNonNull,
-        GraphQLScalarType,
-        Kind,
         ObjectFieldNode,
         ObjectValueNode,
         ValueNode
     } from "graphql";
+
+	import {
+		GraphQLEnumType,
+		GraphQLInputObjectType,
+		GraphQLList,
+		GraphQLNonNull,
+		GraphQLScalarType,
+		Kind
+	} from 'graphql'
+
 
     const createArgumentNodeFromSchema = (name: string, graphQLArgument: GraphQLInputType | GraphQLField<any, any, any>): ArgumentNode => ({
 		kind: Kind.ARGUMENT,

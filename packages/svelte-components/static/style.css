@@ -28,6 +28,9 @@ head {
     --lime-7: #3d836b;
     --lime-8: #2e6874;
     --lime-9: #2e6874;
+    --light-1: #dfe78a;
+    --light-2: #e6ebb4;
+    --light-3: #eff1d5;
 }
 
 
@@ -72,7 +75,7 @@ select {
     color: var(--lime-2);
 }
 
-a {
+a, input[type=submit] {
     text-decoration: none;
     color: var(--lime-1)
 }
@@ -81,6 +84,27 @@ a:visited {
     color: var(--lime-5);
 }
 
-a:hover {
+a:hover, input[type=submit]:hover {
     background-color: var(--lime-8);
+}
+
+
+.main-content {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+@media (min-width: 700px) {
+    .main-content {
+        border-left: 1px solid white;
+        padding-left: 15px;
+        margin: auto;
+        width: 600px
+    }
+}
+
+@media (min-width: 1000px) {
+    .main-content {
+        margin: auto;
+        width: 80%
+    }
 }
