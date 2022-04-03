@@ -1,9 +1,6 @@
 {
   "name": "@imtala/svelte-components",
-  "version": "1.0.0",
-  "bin": {
-    "build-imtala-client": "./build_client"
-  },
+  "version": "1.1.2",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -45,7 +42,8 @@
     "graphql": "^16.2.0",
     "graphql-request": "^4.2.0",
     "koa": "^2.13.4",
-    "koa-connect": "^2.1.0"
+    "koa-connect": "^2.1.0",
+    "svelte2tsx": "^0.5.6"
   },
   "repository": {
     "type": "git",
