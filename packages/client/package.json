@@ -1,6 +1,6 @@
 {
   "name": "@imtala/client",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
