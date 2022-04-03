@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store'
-import { browser } from '$app/env';
 
 type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 
@@ -28,7 +27,7 @@ const createStore = () => {
     const getLocalStorageData = () => {
         console.log('local connection fetching')
         const fallback = []
-        const stored = browser 
+        const stored = localStorage 
             ? localStorage.getItem(LOCAL_CONNECTIONS_KEY) || JSON.stringify(fallback)
             : JSON.stringify(fallback)
 
@@ -204,7 +203,7 @@ const createStore = () => {
     }
 
     subscribe(({connectionConfig, connections}) => {
-        if (browser) {
+        if (localStorage) {
             localStorage.setItem(LOCAL_CONNECTIONS_KEY, JSON.stringify(connectionConfig.filter(connection => connection.storage === 'localstorage')))
         }
 

@@ -12,5 +12,4 @@
 
 {#each newConnections as newConnection}
 <h3>new!</h3>
-<
 {/each}
