@@ -3,7 +3,7 @@ import * as path from 'path'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';// import node adaptor
 import Koa from 'koa'
-import { handler } from '../../client/handler.js';
+import { handler } from '../client/handler.js';
 import c2k from 'koa-connect';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
