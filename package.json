@@ -8,7 +8,6 @@
   "author": "@des-des",
   "license": "UNLICENSED",
   "workspaces": [
-    "packages/gql-docs"
   ],
   "bugs": {
     "url": "https://github.com/des-des/pgsass/issues"
