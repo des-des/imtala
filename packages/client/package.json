@@ -1,6 +1,6 @@
 {
   "name": "@imtala/client",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -38,5 +38,9 @@
     "@sveltejs/adapter-static": "^1.0.0-next.29",
     "graphql": "^16.3.0",
     "graphql-request": "^4.2.0"
+  },
+  "exports": {
+    "./entrypoints/buildClient.js": "./entrypoints/buildClient.js",
+    "./package.json": "./package.json"
   }
 }

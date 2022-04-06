@@ -36,7 +36,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@imtala/client": "workspace:^0.0.1",
+    "@imtala/client": "workspace:^1.0.0",
     "@imtala/svelte-components": "workspace:^1.2.0",
     "@sveltejs/adapter-node": "^1.0.0-next.70",
     "@sveltejs/adapter-static": "^1.0.0-next.28",
