@@ -42,7 +42,7 @@ program
 program
     .command('serve')
     .description('Serve the graphql client on localhost')
-    .requiredOption('-F, --introspection-file <filePath>', 'path of introspection file')
+    .option('-F, --introspection-file <filePath>', 'path of introspection file')
     .option('-P, --port <port>', 'port to listen on')
     // .option('-E, --gql-endpoint <url>', 'url of target graphql endpoint')
     // .option('-H, --gql-endpoint-headers <headers>', 'headers to attach to requests to the gql endpoint')

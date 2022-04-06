@@ -8,3 +8,4 @@ node_modules
 !.env.example
 build_client
 svelte.config.js
+src/cli_config.json
