@@ -45,7 +45,6 @@
 
 <Header connectionRoot={connectionName} activeNav={'query-builder'} docRoot='root' rootLinkName='imtala'/>
 
-
 <div class='wrapper'>
     <div style='max-width: 50vw; max-height: 100vh; overflow-y: scroll; padding-right: 2rem;'>
         <QueryBuilder
