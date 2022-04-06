@@ -6,7 +6,5 @@ node_modules
 .env
 .env.*
 !.env.example
-/build
-/client
-/dist
-cli_config.json
+build_client
+# svelte.config.js

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo "THIS IS WORKING"
-
-cd "$(dirname "$0")"
-
-npm run build

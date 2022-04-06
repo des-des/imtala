@@ -4,7 +4,6 @@
 
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
-        
         await connections.initStore(fetch);
 
 
@@ -14,9 +13,13 @@
     }
 </script>
 
+<script lang="ts">
+    $: introspection = $connections.docGenIntrospection && $connections.docGenIntrospection.kind === 'fs' && $connections.docGenIntrospection && $connections.docGenIntrospection.introspection.data
+</script>
+
 
 <svelte:head>
     <title>Imtala</title>
 </svelte:head>
 
-<GraphQlRoot introspectionQuery={$connections.docGenIntrospection.introspection.data} />
+<GraphQlRoot introspectionQuery={introspection} />

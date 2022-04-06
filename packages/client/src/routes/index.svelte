@@ -13,10 +13,6 @@
 
 <script lang="ts">
     $: connectionList = $connections.connectionConfig
-
-    $: {
-        console.log(connectionList)
-    }
 </script>
 
 <style>

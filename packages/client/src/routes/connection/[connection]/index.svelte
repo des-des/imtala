@@ -1,6 +1,4 @@
 <script context='module' lang='ts'>
-    export const ssr = false;
-
     import { Kind, OperationTypeNode } from 'graphql';
     import type { OperationDefinitionNode } from 'graphql';
     import {connections} from '@imtala/svelte-components/store/connections'
