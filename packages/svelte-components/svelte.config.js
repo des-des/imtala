@@ -4,7 +4,6 @@ import preprocess from 'svelte-preprocess';
 
 import fs from 'fs'
 
-console.log(process.argv)
 const buildMode = process.argv[3] || 'gen-docs';
 
 if (process.argv.length >= 4) {

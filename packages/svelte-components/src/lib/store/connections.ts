@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import {browser} from '$app/env'
 
 type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 
@@ -20,19 +21,15 @@ const LOCAL_CONNECTIONS_KEY = 'imtala:connections'
 
 const createStore = () => {
     let storeState: 'not_initialised' | Promise<void> | 'complete' = 'not_initialised'
-    // let connectionStates: {[k: string]: 'not_initialised' | Promise<void> | 'complete' } = {}
     let storeConnectionConfig
     let storeConnections
 
     const getLocalStorageData = () => {
-        console.log('local connection fetching')
         const fallback = []
-        const stored = localStorage 
+        const stored = browser 
             ? localStorage.getItem(LOCAL_CONNECTIONS_KEY) || JSON.stringify(fallback)
             : JSON.stringify(fallback)
 
-        console.log({stored})
-        
         try {
             return JSON.parse(stored)
         } catch (e) {
@@ -47,7 +44,7 @@ const createStore = () => {
             [name: string]: any
         };
         connectionConfig: ConnectionConfig[];
-        docGenIntrospection?: string;
+        docGenIntrospection?: ConnectionConfig;
     }>({
         connections: { },
         connectionConfig: getLocalStorageData()
@@ -69,10 +66,10 @@ const createStore = () => {
         const cliConfig = await fetchCliConfig(fetch)
         const serverConnections = cliConfig.connections;
         const localConnections = getLocalStorageData()
-        const docGenIntrospection = cliConfig.docGenIntrospection && cliConfig.connections.find(conn => conn.name === cliConfig.docGenIntrospection)
+        const docGenIntrospectionConnection = cliConfig.docGenIntrospection && cliConfig.connections.find(conn => conn.name === cliConfig.docGenIntrospection)
 
-        const docGenIntrospectionState = docGenIntrospection ? {
-            docGenIntrospection
+        const docGenIntrospectionState = docGenIntrospectionConnection ? {
+            docGenIntrospection: docGenIntrospectionConnection
         } : {}
         update(state => ({
             ...state,
@@ -113,12 +110,6 @@ const createStore = () => {
         const connection = storeConnectionConfig
             .find(connection => connection.name === connectionName)
 
-        console.log({
-            storeConnectionConfig,
-            connection,
-            connectionName
-        })
-
         if (!connection) {
             throw new Error('could not find the requested connection inside config')
         }
@@ -137,14 +128,9 @@ const createStore = () => {
                 }
             }))
         } else {
-            console.log('getting remote introspection')
-            // packages/cli/src/routes/connection/[connection]/index.json.ts
             const introspectionResponse = await fetch(`/connection/${connectionName}/data`, {
                 method: 'POST',
                 body: JSON.stringify(connection),
-                // headers: {
-                //     ['Content-Type']: 'application/json'
-                // }
             })
 
             const introspection = await introspectionResponse.json()
@@ -160,50 +146,10 @@ const createStore = () => {
             }))
         }
 
-        // const connection = storeConnectionConfig
-        //     .find(connection => connection.name === connectionName)
-
-        // if (!connection) {
-        //     throw new Error('could not find the requested connection inside config')
-        // }
-
-        // console.log(connection)
-
-        // if (connection.kind === 'fs') { // renamed to prefetched?
-        //     update(state => ({
-        //         ...state,
-        //         connections: {
-        //             ...state.connections,
-        //             [connection.name]: {
-        //                 introspection: connection.introspection
-        //             }
-        //         }
-        //     }))
-        // } else {
-        //     const introspectionResponse = await fetch(`/connection/${connectionName}`, {
-        //         method: 'POST',
-        //         body: JSON.stringify(connection),
-        //         headers: {
-        //             ['Content-Type']: 'application/json'
-        //         }
-        //     })
-
-        //     const introspection = await introspectionResponse.json()
-
-        //     update(state => ({
-        //         ...state,
-        //         connections: {
-        //             ...state.connections,
-        //             [connection.name]: {
-        //                 introspection: introspection
-        //             }
-        //         }
-        //     }))
-        // }
     }
 
     subscribe(({connectionConfig, connections}) => {
-        if (localStorage) {
+        if (browser) {
             localStorage.setItem(LOCAL_CONNECTIONS_KEY, JSON.stringify(connectionConfig.filter(connection => connection.storage === 'localstorage')))
         }
 
