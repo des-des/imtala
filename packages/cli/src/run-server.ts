@@ -1,3 +1,3 @@
 import {start} from './server.js'
 
-start({port: 3000})
+start({port: 3000, cliConfig: {}})

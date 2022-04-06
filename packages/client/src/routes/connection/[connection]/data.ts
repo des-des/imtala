@@ -1,4 +1,3 @@
-import cliConfig from '../../../cli_config.json'
 import { GraphQLClient } from 'graphql-request'
 import {getIntrospectionQuery} from 'graphql'
 
