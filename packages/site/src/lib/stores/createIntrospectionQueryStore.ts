@@ -28,7 +28,6 @@ const createIntrospectionStore = () => {
 
             try {
                 const introspectionQueryResponse = await fetchIntrospection();
-                console.log({introspectionQueryResponse})
     
                 if (!introspectionQueryResponse.ok) {
                     const payload = await introspectionQueryResponse.json()
@@ -42,8 +41,6 @@ const createIntrospectionStore = () => {
                 }
 
                 const introspectionQueryPayload = await introspectionQueryResponse.json()
-    
-                console.log({introspectionQueryPayload})
 
                 set({
                     kind: 'success',

@@ -60,7 +60,6 @@ const run = async ({
         })
 
         svelteProcess.on('close', (code) => {
-            console.log(`svelte process exited with code ${code}`);
 
             res({outputDirectory: path.resolve(__dirname, '..', 'build')})
         });
