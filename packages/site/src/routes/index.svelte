@@ -1,3 +1,15 @@
+<script lang="ts">
+	import { onMount } from "svelte";
+    import {connections} from '@imtala/svelte-components/store/connections'
+
+	
+	onMount(() => {
+        connections.initStore(fetch);
+        connections.initConnection('github', fetch)
+        connections.initConnection('spotify', fetch)
+	})
+</script>
+
 <main>
 	<h1>Imtala</h1>
 

@@ -1,17 +1,29 @@
 <script context='module' lang='ts'>
     import {connections} from '@imtala/svelte-components/store/connections'
+
+    export const prerender = false;
+
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
         await connections.initStore(fetch);
 
         return {
-            props: {}
+            props: {
+                fetch
+            }
         }
     }
 
 </script>
 
 <script lang="ts">
+    import { onMount } from 'svelte';
+    export let fetch;
+
+    onMount(() => {
+        connections.rehydrateStore(fetch)
+    })
+
     $: connectionList = $connections.connectionConfig
 </script>
 

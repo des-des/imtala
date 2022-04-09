@@ -1,9 +1,10 @@
 {
   "name": "@imtala/client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
+    "serve:docs": "http-server ./build",
     "build:client": "node entrypoints/buildClientCli.js client",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -23,6 +24,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
+    "http-server": "^14.1.0",
     "prettier": "^2.5.1",
     "prettier-plugin-svelte": "^2.5.0",
     "svelte": "^3.44.0",
@@ -33,7 +35,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@imtala/svelte-components": "workspace:^1.2.0",
+    "@imtala/svelte-components": "workspace:^1.2.1",
     "@sveltejs/adapter-node": "^1.0.0-next.73",
     "@sveltejs/adapter-static": "^1.0.0-next.29",
     "graphql": "^16.3.0",

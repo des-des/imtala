@@ -43,9 +43,11 @@ const run = async ({
 
         const __dirname = dirname(fileURLToPath(import.meta.url));
 
+        const configAsTypescript = `export default ${JSON.stringify(createCliConfig(buildMode, introspectionFilePath), null, 4)}`
+
         fs.writeFileSync(
-            path.resolve(__dirname, '..', 'src', 'cli_config.json'),
-            JSON.stringify(createCliConfig(buildMode, introspectionFilePath), null, 4)
+            path.resolve(__dirname, '..', 'src', 'cli_config.ts'),
+            configAsTypescript
         )
 
         fs.writeFileSync(

@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store'
-import {browser} from '$app/env'
 
 type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 
@@ -25,8 +24,9 @@ const createStore = () => {
     let storeConnections
 
     const getLocalStorageData = () => {
+        const localStorage = typeof window !== "undefined" && window.localStorage;
         const fallback = []
-        const stored = browser 
+        const stored = localStorage 
             ? localStorage.getItem(LOCAL_CONNECTIONS_KEY) || JSON.stringify(fallback)
             : JSON.stringify(fallback)
 
@@ -47,7 +47,7 @@ const createStore = () => {
         docGenIntrospection?: ConnectionConfig;
     }>({
         connections: { },
-        connectionConfig: getLocalStorageData()
+        connectionConfig: []
     })
 
     const fetchCliConfig = async (fetch: Fetch) => {
@@ -65,7 +65,7 @@ const createStore = () => {
     const initConnectionConfig = async (fetch: Fetch) => {
         const cliConfig = await fetchCliConfig(fetch)
         const serverConnections = cliConfig.connections;
-        const localConnections = getLocalStorageData()
+        // const localConnections = getLocalStorageData()
         const docGenIntrospectionConnection = cliConfig.docGenIntrospection && cliConfig.connections.find(conn => conn.name === cliConfig.docGenIntrospection)
 
         const docGenIntrospectionState = docGenIntrospectionConnection ? {
@@ -74,7 +74,7 @@ const createStore = () => {
         update(state => ({
             ...state,
             ...docGenIntrospectionState,
-            connectionConfig: serverConnections.concat(localConnections)
+            connectionConfig: serverConnections
         }))
 
         storeState = 'complete'
@@ -107,8 +107,12 @@ const createStore = () => {
         }
 
 
-        const connection = storeConnectionConfig
+        const existingConnection = storeConnectionConfig
             .find(connection => connection.name === connectionName)
+
+        const local = getLocalStorageData()
+
+        const connection = existingConnection || local.find(connection => connection.name === connectionName)
 
         if (!connection) {
             throw new Error('could not find the requested connection inside config')
@@ -149,22 +153,42 @@ const createStore = () => {
     }
 
     subscribe(({connectionConfig, connections}) => {
-        if (browser) {
-            localStorage.setItem(LOCAL_CONNECTIONS_KEY, JSON.stringify(connectionConfig.filter(connection => connection.storage === 'localstorage')))
-        }
-
         storeConnectionConfig = connectionConfig
         storeConnections = connections
 
     })
 
+    const rehydrateStore = async (fetch: Fetch) => {
+        await initConnectionConfig(fetch)
+
+        update(state => ({
+            ...state,
+            connectionConfig: state.connectionConfig.concat(getLocalStorageData())
+        }))
+    }
+
 
     return {
         subscribe,
-        addLocalConnection: conn => update(state => ({
-            ...state,
-            connectionConfig: state.connectionConfig.concat(conn)
-        })),
+        rehydrateStore,
+        addLocalConnection: conn => {
+                update(state => {
+                    const newConnections = state.connectionConfig.concat(conn)
+            
+                    const localStorage = typeof window !== "undefined" && window.localStorage;
+
+                    
+                    localStorage && localStorage.setItem(
+                        LOCAL_CONNECTIONS_KEY,
+                        JSON.stringify(
+                            newConnections.filter(connection => connection.storage === 'localstorage')))
+
+                    return {
+                        ...state,
+                        connectionConfig: newConnections
+                    }
+                })
+        },
         initStore,
         initConnection
     }

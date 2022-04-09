@@ -7,11 +7,17 @@
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch, params}) {
         await connections.initStore(fetch);
-        await connections.initConnection(params.connection, fetch)
+
+        try {
+            await connections.initConnection(params.connection, fetch)
+        } catch (e) {
+            console.error(e)
+        }
 
         return {
             props: {
-                connectionName: params.connection
+                connectionName: params.connection,
+                fetch
             }
         }
     }
@@ -22,10 +28,18 @@
     import QueryBuilder from '@imtala/svelte-components/components/QueryBuilder.svelte'
 
     import {print} from 'graphql'
+import { onMount } from 'svelte';
 
     export let connectionName;
+    export let fetch;
 
-    $: introspectionResult = $connections.connections[connectionName].introspection
+    onMount(() => {
+        connections.initConnection(connectionName, fetch)
+    })
+
+    $: connectionExists = $connections.connections[connectionName];
+
+    $: introspectionResult = connectionExists && $connections.connections[connectionName].introspection
 
     let ast: OperationDefinitionNode = {
 		kind: Kind.OPERATION_DEFINITION,
@@ -48,12 +62,18 @@
 
 <div class='wrapper'>
     <div style='max-width: 50vw; max-height: 100vh; overflow-y: scroll; padding-right: 2rem;'>
-        <QueryBuilder
-            bind:ast={ast}
-            typeName='Query'
-            fieldName='query'
-            introspectionQuery={introspectionResult.data}
-        />
+        {#if connectionExists}
+            <QueryBuilder
+                bind:ast={ast}
+                typeName='Query'
+                fieldName='query'
+                introspectionQuery={introspectionResult.data}
+            />
+        {:else}
+            <p>
+                loading
+            </p>
+        {/if}
     </div>
     <div style="border-left: 1px solid white; padding-left: 2rem;">
         <pre style='font-size: 14px;'>

@@ -1,6 +1,6 @@
 {
   "name": "@imtala/site",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A svelte component that creates GraphQL documentation",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/des-des/imtala#readme",
   "dependencies": {
-    "@imtala/svelte-components": "workspace:^1.2.0",
+    "@imtala/svelte-components": "workspace:^1.2.1",
     "graphql": "^16.2.0",
     "mdsvex": "^0.9.8"
   }

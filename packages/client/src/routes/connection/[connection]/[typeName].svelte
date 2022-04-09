@@ -4,7 +4,12 @@
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch, params }) {
         await connections.initStore(fetch);
-        await connections.initConnection(params.connection, fetch)
+
+        try {
+            await connections.initConnection(params.connection, fetch)
+        } catch (e) {
+            console.error(e)
+        }
 
         return {
             props: {
@@ -18,9 +23,15 @@
 <script lang='ts'>
     import Header from '@imtala/svelte-components/components/header.svelte';
     import GraphQlRoot from '@imtala/svelte-components/components/GqlDocumentation.svelte'
+    import { onMount } from 'svelte';
 
     export let connectionName: string;
 	export let typeName: string;
+
+    onMount(() => {
+        connections.initConnection(connectionName, fetch)
+    })
+
 </script>
 
 <svelte:head>
@@ -29,5 +40,8 @@
 
 <Header connectionRoot={`../${connectionName}`} activeNav={'schema-exporer'}/>
 
-
-<GraphQlRoot introspectionQuery={$connections.connections[connectionName].introspection.data} typeName={typeName === 'docs' ? undefined : typeName}/>
+{#if $connections.connections[connectionName]}
+    <GraphQlRoot introspectionQuery={$connections.connections[connectionName].introspection.data} typeName={typeName === 'docs' ? undefined : typeName}/>
+{:else}
+    <p>loading</p>
+{/if}

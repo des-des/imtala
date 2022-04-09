@@ -9,3 +9,4 @@ node_modules
 build_client
 svelte.config.js
 src/cli_config.json
+src/cli_config.ts
