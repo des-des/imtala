@@ -1,6 +1,6 @@
 {
   "name": "@imtala/cli",
-  "version": "1.1.3",
+  "version": "1.1.5",
   "bin": {
     "imtala": "./dist/index.js"
   },
@@ -36,8 +36,8 @@
   },
   "type": "module",
   "dependencies": {
-    "@imtala/client": "workspace:^1.0.0",
-    "@imtala/svelte-components": "workspace:^1.2.0",
+    "@imtala/client": "workspace:^1.0.3",
+    "@imtala/svelte-components": "workspace:^1.2.1",
     "@sveltejs/adapter-node": "^1.0.0-next.70",
     "@sveltejs/adapter-static": "^1.0.0-next.28",
     "commander": "^9.0.0",

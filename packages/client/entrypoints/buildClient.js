@@ -56,7 +56,7 @@ const run = async ({
         )
 
 
-        const svelteProcess = spawn(path.resolve(__dirname, '..', 'node_modules/.bin/svelte-kit'), [svelteCommand], {
+        const svelteProcess = spawn("npm", ['run', svelteCommand], {
             cwd: path.resolve(__dirname, '..'),
             stdio: [process.stdin, process.stdout, process.stderr]
         })
