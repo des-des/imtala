@@ -20,6 +20,8 @@
 		<li> > with staticly rendered html and a small js bundle, imtala generated documentation will feel snappy, is easy to host and will play well with search engines</li>
 	</ol>
 
+	Install and usage instructions on <a href="https://github.com/des-des/imtala">github</a>.
+
 	<h2>Demo</h2>
 	<ol>
 		<li> > <a href="docs/github">Github GraphQL API documentation demo</a></li>
@@ -35,7 +37,7 @@
 		<li> > A simple static site builder </li>
 	</ol>
 
-	Follow my <a href="https://twitter.com/eoin_des_des">twitter</a>, or this project's <a href="https://github.com/des-des/imtala">github</a>.
+	Follow my <a href="https://twitter.com/eoin_des_des">twitter</a> for updates.
 </main>
 
 <style>
