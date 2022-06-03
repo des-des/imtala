@@ -14,6 +14,12 @@ export type ConnectionConfig = CommonConnectionConfig & ({
 } | {
     kind: 'fs';
     introspection: any;
+} | {
+    kind: 'github';
+    clientId: string;
+    clientSecret: string;
+    state: string;
+    accessToken?: string;
 })
 
 const LOCAL_CONNECTIONS_KEY = 'imtala:connections'
@@ -26,7 +32,7 @@ const createStore = () => {
     const getLocalStorageData = () => {
         const localStorage = typeof window !== "undefined" && window.localStorage;
         const fallback = []
-        const stored = localStorage 
+        const stored = localStorage
             ? localStorage.getItem(LOCAL_CONNECTIONS_KEY) || JSON.stringify(fallback)
             : JSON.stringify(fallback)
 
@@ -39,14 +45,14 @@ const createStore = () => {
         return fallback
     }
 
-    const {subscribe, set, update} = writable<{
+    const { subscribe, set, update } = writable<{
         connections: {
             [name: string]: any
         };
         connectionConfig: ConnectionConfig[];
         docGenIntrospection?: ConnectionConfig;
     }>({
-        connections: { },
+        connections: {},
         connectionConfig: []
     })
 
@@ -93,6 +99,18 @@ const createStore = () => {
         }
     }
 
+    const getConnection = (connectionName: string): ConnectionConfig | undefined => {
+        const existingConnection = storeConnectionConfig
+            .find(connection => connection.name === connectionName)
+
+        if (existingConnection) {
+            return existingConnection
+        }
+
+        return getLocalStorageData().find(connection => connection.name === connectionName)
+
+    }
+
     const initConnection = async (connectionName: string, fetch: Fetch) => {
         if (storeState === 'not_initialised') {
             throw new Error('Cannot initialise a connection before first initialising the store')
@@ -106,13 +124,8 @@ const createStore = () => {
             throw new Error('something bad has happened')
         }
 
+        const connection = getConnection(connectionName)
 
-        const existingConnection = storeConnectionConfig
-            .find(connection => connection.name === connectionName)
-
-        const local = getLocalStorageData()
-
-        const connection = existingConnection || local.find(connection => connection.name === connectionName)
 
         if (!connection) {
             throw new Error('could not find the requested connection inside config')
@@ -144,7 +157,7 @@ const createStore = () => {
                 connections: {
                     ...state.connections,
                     [connection.name]: {
-                        introspection: {data: introspection}
+                        introspection: { data: introspection }
                     }
                 }
             }))
@@ -152,7 +165,7 @@ const createStore = () => {
 
     }
 
-    subscribe(({connectionConfig, connections}) => {
+    subscribe(({ connectionConfig, connections }) => {
         storeConnectionConfig = connectionConfig
         storeConnections = connections
 
@@ -167,27 +180,94 @@ const createStore = () => {
         }))
     }
 
+    const updateLocalConnection = (conn: ConnectionConfig) => {
+        update(state => {
+            const oldConnections = state.connectionConfig;
+            const exists = oldConnections.some(oldConnection => oldConnection.name === conn.name)
+            const newConnections = exists
+                ? oldConnections.map(oldConnection => oldConnection.name === conn.name ? conn : oldConnection)
+                : oldConnections.concat(conn)
+
+            const localStorage = typeof window !== "undefined" && window.localStorage;
+
+
+            localStorage && localStorage.setItem(
+                LOCAL_CONNECTIONS_KEY,
+                JSON.stringify(
+                    newConnections.filter(connection => connection.storage === 'localstorage')))
+
+            return {
+                ...state,
+                connectionConfig: newConnections
+            }
+        })
+    }
+
+    const oauthCallback = async (fetch: Fetch, connectionName: string, code: string, state: string) => {
+        const connection = getConnection(connectionName)
+
+
+
+        if (!connection) {
+            throw new Error(`could not find the requested connection ${connectionName} inside config`)
+        }
+
+        if (connection.kind !== 'github') {
+            throw new Error(`Oauth callback of connection kind ${connection.kind} is not supported`)
+        }
+
+        if (state !== connection.state) {
+            throw new Error('state does not match')
+        }
+
+
+        const accessTokenResponse = await fetch(`/connection/${connectionName}/token`, {
+            method: 'POST',
+            body: JSON.stringify({
+                clientId: connection.clientId,
+                clientSecret:connection.clientSecret,
+                code: code
+            }),
+            headers: {
+                'Accept': 'Application/json'
+            }
+        })
+
+        const {
+            accessToken
+        } = await accessTokenResponse.json()
+
+        const updatedConnection = {
+            ...connection,
+            accessToken
+        }
+
+        updateLocalConnection(updatedConnection)
+    }
+
 
     return {
         subscribe,
         rehydrateStore,
+        oauthCallback,
+        updateLocalConnection,
         addLocalConnection: conn => {
-                update(state => {
-                    const newConnections = state.connectionConfig.concat(conn)
-            
-                    const localStorage = typeof window !== "undefined" && window.localStorage;
+            update(state => {
+                const newConnections = state.connectionConfig.concat(conn)
 
-                    
-                    localStorage && localStorage.setItem(
-                        LOCAL_CONNECTIONS_KEY,
-                        JSON.stringify(
-                            newConnections.filter(connection => connection.storage === 'localstorage')))
+                const localStorage = typeof window !== "undefined" && window.localStorage;
 
-                    return {
-                        ...state,
-                        connectionConfig: newConnections
-                    }
-                })
+
+                localStorage && localStorage.setItem(
+                    LOCAL_CONNECTIONS_KEY,
+                    JSON.stringify(
+                        newConnections.filter(connection => connection.storage === 'localstorage')))
+
+                return {
+                    ...state,
+                    connectionConfig: newConnections
+                }
+            })
         },
         initStore,
         initConnection

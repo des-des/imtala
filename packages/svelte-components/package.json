@@ -17,33 +17,34 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
-    "@playwright/test": "^1.19.1",
+    "@playwright/test": "^1.22.2",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "1.0.0-next.291",
     "@types/koa": "^2.13.4",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-svelte3": "^3.2.1",
-    "prettier": "^2.5.1",
-    "prettier-plugin-svelte": "^2.5.0",
-    "svelte": "^3.44.0",
-    "svelte-check": "^2.2.6",
-    "svelte-preprocess": "^4.10.1",
-    "tslib": "^2.3.1",
-    "typescript": "~4.5.4"
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-svelte3": "^3.4.1",
+    "prettier": "^2.6.2",
+    "prettier-plugin-svelte": "^2.7.0",
+    "svelte": "^3.48.0",
+    "svelte-check": "^2.7.1",
+    "svelte-preprocess": "^4.10.6",
+    "tslib": "^2.4.0",
+    "typescript": "~4.5.5"
   },
   "type": "module",
   "dependencies": {
-    "@sveltejs/adapter-node": "^1.0.0-next.70",
-    "@sveltejs/adapter-static": "^1.0.0-next.28",
-    "commander": "^9.0.0",
-    "graphql": "^16.2.0",
+    "@sveltejs/adapter-node": "^1.0.0-next.74",
+    "@sveltejs/adapter-static": "^1.0.0-next.31",
+    "commander": "^9.2.0",
+    "cookie": "^0.5.0",
+    "graphql": "^16.5.0",
     "graphql-request": "^4.2.0",
     "koa": "^2.13.4",
     "koa-connect": "^2.1.0",
-    "svelte2tsx": "^0.5.6"
+    "svelte2tsx": "^0.5.10"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,9 @@
     "graphiql",
     "svelte"
   ],
+  "exports": {
+    "./*": "./src/lib/*"
+  },
   "author": "@des-des",
   "license": "MIT",
   "bugs": {
