@@ -20,7 +20,6 @@
     $: fields = fieldMap && Object.keys(fieldMap).map(k => fieldMap[k])
     $: title = typeof typeName === 'string' ? typeName : 'Root types';
 
-
 </script>
 <svelte:head>
     <title>
