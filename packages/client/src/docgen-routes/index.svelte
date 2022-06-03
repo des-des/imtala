@@ -1,20 +1,8 @@
-<script context='module' lang='ts'>
-    import GraphQlRoot from '@imtala/svelte-components/components/GqlDocumentation.svelte'
-    import {connections} from '@imtala/svelte-components/store/connections'
-
-    /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch }) {
-        await connections.initStore(fetch);
-
-
-        return {
-            props: {}
-        }
-    }
-</script>
-
 <script lang="ts">
-    $: introspection = $connections.docGenIntrospection && $connections.docGenIntrospection.kind === 'fs' && $connections.docGenIntrospection && $connections.docGenIntrospection.introspection.data
+    import GraphQlRoot from '@imtala/svelte-components/components/GqlDocumentationV2.svelte'
+
+    export let documentationProps
+    export let connectionName
 </script>
 
 
@@ -22,4 +10,22 @@
     <title>Imtala</title>
 </svelte:head>
 
-<GraphQlRoot introspectionQuery={introspection} />
+<main>
+    <GraphQlRoot documentationProps={documentationProps} />
+</main>
+
+
+<style>
+	main {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	@media (min-width: 1000px) {
+		main {
+			border-left: 1px solid white;
+			padding-left: 15px;
+			margin: auto;
+			width: 900px
+		}
+	}
+</style>

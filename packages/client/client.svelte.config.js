@@ -7,7 +7,11 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 
+	
 	kit: {
+		prerender: {
+			default: false
+		},
 		adapter: adapter({
 			out: 'build_client'
 		})

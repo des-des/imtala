@@ -3,7 +3,7 @@ import * as path from 'path'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
-
+import {connectionStore} from '@imtala/svelte-components/api/db'
 
 
 export const createCliConfig = (buildMode, introspectionFilePath) => {
@@ -43,12 +43,26 @@ const run = async ({
 
         const __dirname = dirname(fileURLToPath(import.meta.url));
 
-        const configAsTypescript = `export default ${JSON.stringify(createCliConfig(buildMode, introspectionFilePath), null, 4)}`
 
-        fs.writeFileSync(
-            path.resolve(__dirname, '..', 'src', 'cli_config.ts'),
-            configAsTypescript
-        )
+
+        // const configAsTypescript = `export default ${JSON.stringify(createCliConfig(buildMode, introspectionFilePath), null, 4)}`
+        if (introspectionFilePath) {
+            const resolvedIntrospectionFilePath = path.resolve(introspectionFilePath)
+            const introspectionFileName = resolvedIntrospectionFilePath.split('/').reverse()[0].split('.json')[0]
+            const introspectionData = JSON.parse(fs.readFileSync(resolvedIntrospectionFilePath).toString())
+    
+            connectionStore.createOrUpdateConnection({
+                name: introspectionFileName,
+                introspection: introspectionData.data,
+                kind: 'static-introspection',
+                genDocs: true
+            })
+        }
+
+        // fs.writeFileSync(
+        //     path.resolve(__dirname, '..', 'src', 'cli_config.ts'),
+        //     configAsTypescript
+        // )
 
         fs.writeFileSync(
             path.resolve(__dirname, '..', 'svelte.config.js'),
