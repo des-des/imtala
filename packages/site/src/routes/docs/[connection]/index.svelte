@@ -1,31 +1,15 @@
-<script context='module' lang='ts'>
-    import { Kind, OperationTypeNode } from 'graphql';
-    import type { OperationDefinitionNode } from 'graphql';
-    import {connections} from '@imtala/svelte-components/store/connections'
-
-
-    /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch, params}) {
-        await connections.initStore(fetch);
-        await connections.initConnection(params.connection, fetch)
-
-        return {
-            props: {
-                connectionName: params.connection
-            }
-        }
-    }
-</script>
-
 <script lang='ts'>
     import Header from '@imtala/svelte-components/components/header.svelte';
     import QueryBuilder from '@imtala/svelte-components/components/QueryBuilder.svelte'
+    import type {Connection} from '@imtala/svelte-components/api/db'
+    import { Kind, OperationTypeNode } from 'graphql';
+    import type { OperationDefinitionNode } from 'graphql';
 
     import {print} from 'graphql'
+    export let connection: Connection;
+    export let introspection;
 
-    export let connectionName;
-
-    $: introspectionResult = $connections.connections[connectionName].introspection
+    const connectionName = connection.name;
 
     let ast: OperationDefinitionNode = {
 		kind: Kind.OPERATION_DEFINITION,
@@ -35,8 +19,6 @@
 			selections: []
 		}
 	};
-
-
 </script>
 
 <svelte:head>
@@ -50,13 +32,11 @@
         <QueryBuilder
             bind:ast={ast}
             fieldName='query'
-            introspectionQuery={introspectionResult.data}
+            introspectionQuery={introspection}
         />
     </div>
     <div style="border-left: 1px solid white; padding-left: 2rem;">
-        <pre style='font-size: 14px;'>
-            {print(ast)}
-        </pre>
+        <pre style='font-size: 14px;'>{print(ast)}</pre>
     </div>
 </div>
     

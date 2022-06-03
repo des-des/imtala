@@ -13,27 +13,34 @@
 <main>
 	<h1>Imtala</h1>
 
-	Imtala is an interactive graphql client built using sveltekit.
-	Imtala is built using SvelteKit, which gives it a couple of interesting advantages over the reference implementation of graphiql, which is built using react:
+	<p> Imtala is an opne source interactive graphql client and toolkit. </p>
+
+	<p>With it you can:</p>
 	<ol>
-		<li> > Imtala can consume a graphql introspection query and emit a static website holding both an interactive query builder, and documentation for your api.</li>
-		<li> > with staticly rendered html and a small js bundle, imtala generated documentation will feel snappy, is easy to host and will play well with search engines</li>
+		<li> > Save configurations to connect to multiple different graphql endpoints</li>
+		<li> > Authenticate using Oauth2 (No more copy-pasting auth tokens) </li>
+		<li> > Generate static documentation for your GraphQL API </li>
+		<li> > Explore your api and build queries with an interactive query builder </li>
 	</ol>
 
-	Install and usage instructions on <a href="https://github.com/des-des/imtala">github</a>.
-
-	<h2>Demo</h2>
+	<p>
+		Imtala is built with svelte and has a lightweight client, it feels snappy and does not have the same memory footprint of the react based graphiql. 
+	</p>
+	<p>
+		Find installation and usage instructions in the <a href="https://github.com/des-des/imtala">Imtala github repository</a>.
+	</p>
+	<h2>Demos</h2>
 	<ol>
-		<li> > <a href="docs/github">Github GraphQL API documentation demo</a></li>
-		<li> > <a href="docs/shopify">Shopify Storefront API documentation demo</a></li>
+		<li> > <a href="docs/github">Github GraphQL API</a></li>
+		<li> > <a href="docs/shopify">Shopify Storefront API</a></li>
 	</ol>
 
 	<h2>Roadmap</h2>
 	<ol>
+		<li> > <s> Interactive query builder and documentation generation </s> </li>
 		<li> > <s> Add new connections via web ui </s> </li>
 		<li> > <s> Allow authentication via an authorization header </s> </li>
-		<li> > Allow authentication via oauth2 </li>
-		<li> > Execute querys against an api </li>
+		<li> > <s>Allow authentication via oauth2 </s> </li>
 		<li> > A simple static site builder </li>
 	</ol>
 
