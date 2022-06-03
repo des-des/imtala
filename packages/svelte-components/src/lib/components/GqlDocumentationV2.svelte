@@ -5,7 +5,7 @@
 
 
     export let documentationProps: DocumentationProps
-    export let titlePrepend
+    export let titlePrepend = ''
 
 </script>
 <svelte:head>
@@ -17,7 +17,7 @@
 
 {#if documentationProps.pageKind === 'root'}
     <h1>
-        {titlePrepend}Root types
+        {titlePrepend || ''}Root types
     </h1>
     <p>
         {documentationProps.description ||
