@@ -1,25 +1,26 @@
-<script context='module' lang='ts'>
-    import GraphQlRoot from '@imtala/svelte-components/components/GqlDocumentation.svelte'
-    import {connections} from '@imtala/svelte-components/store/connections'
-
-    /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch, params }) {
-        await connections.initStore(fetch);
-
-        return {
-            props: {
-                typeName: params.typeName === 'root' ? undefined : params.typeName,
-            }
-        }
-    }
+<script lang="ts">
+    import GraphQlRoot from '@imtala/svelte-components/components/GqlDocumentationV2.svelte'
+    export let documentationProps
+    export let connectionName
 </script>
 
-<script lang='ts'>
-	export let typeName: string;
-</script>
 
-<svelte:head>
-    <title>{typeName}</title>
-</svelte:head>
+<main>
+    <GraphQlRoot documentationProps={documentationProps} />
+</main>
 
-<GraphQlRoot introspectionQuery={$connections.docGenIntrospection.introspection.data} typeName={typeName}/>
+
+<style>
+	main {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	@media (min-width: 1000px) {
+		main {
+			border-left: 1px solid white;
+			padding-left: 15px;
+			margin: auto;
+			width: 900px
+		}
+	}
+</style>

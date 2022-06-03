@@ -1,45 +1,15 @@
-<script context='module' lang='ts'>
+<script lang='ts'>
     import { Kind, OperationTypeNode } from 'graphql';
     import type { OperationDefinitionNode } from 'graphql';
-    import {connections} from '@imtala/svelte-components/store/connections'
-
-
-    /** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch, params}) {
-        await connections.initStore(fetch);
-
-        try {
-            await connections.initConnection(params.connection, fetch)
-        } catch (e) {
-            console.error(e)
-        }
-
-        return {
-            props: {
-                connectionName: params.connection,
-                fetch
-            }
-        }
-    }
-</script>
-
-<script lang='ts'>
+    
+    import type {Connection} from '../../../db'
+    export let connection: Connection;
+    export let message: string;
+    export let introspection: any;
     import Header from '@imtala/svelte-components/components/header.svelte';
     import QueryBuilder from '@imtala/svelte-components/components/QueryBuilder.svelte'
 
     import {print} from 'graphql'
-import { onMount } from 'svelte';
-
-    export let connectionName;
-    export let fetch;
-
-    onMount(() => {
-        connections.initConnection(connectionName, fetch)
-    })
-
-    $: connectionExists = $connections.connections[connectionName];
-
-    $: introspectionResult = connectionExists && $connections.connections[connectionName].introspection
 
     let ast: OperationDefinitionNode = {
 		kind: Kind.OPERATION_DEFINITION,
@@ -57,30 +27,33 @@ import { onMount } from 'svelte';
     <title>Root types</title>
 </svelte:head>
 
-<Header connectionRoot={connectionName} activeNav={'query-builder'}/>
 
+<Header connectionRoot={connection.name} activeNav={'query-builder'} docRoot={`docs/root`}/>
 
-<div class='wrapper'>
-    <div style='max-width: 50vw; max-height: 100vh; overflow-y: scroll; padding-right: 2rem;'>
-        {#if connectionExists}
-            <QueryBuilder
-                bind:ast={ast}
-                typeName='Query'
-                fieldName='query'
-                introspectionQuery={introspectionResult.data}
-            />
-        {:else}
-            <p>
-                loading
-            </p>
-        {/if}
+{#if message === 'missing auth headers'}
+    <p>Authentication required to connection to {connection.name}</p>
+
+    {#if connection.kind === 'github-oauth'}
+        <a href='https://github.com/login/oauth/authorize?client_id={connection.clientId}'>connect to github</a>
+    {/if}
+{:else if message}
+    <p>Failed to establish connection</p>
+    <p>{message}</p>
+{:else if introspection}
+    <div class='wrapper'>
+        <div style='max-width: 50vw; max-height: 100vh; overflow-y: scroll; padding-right: 2rem;'>
+                <QueryBuilder
+                    bind:ast={ast}
+                    typeName='Query'
+                    fieldName='query'
+                    introspectionQuery={introspection}
+                />
+        </div>
+        <div style="border-left: 1px solid white; padding-left: 2rem;">
+            <pre style='font-size: 14px;'>{print(ast)}</pre>
+        </div>
     </div>
-    <div style="border-left: 1px solid white; padding-left: 2rem;">
-        <pre style='font-size: 14px;'>
-            {print(ast)}
-        </pre>
-    </div>
-</div>
+{/if}
     
 <style>
     .wrapper {

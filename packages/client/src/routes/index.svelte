@@ -1,30 +1,31 @@
-<script context='module' lang='ts'>
-    import {connections} from '@imtala/svelte-components/store/connections'
+<!-- <script context='module' lang='ts'>
+    // import {connections} from '@imtala/svelte-components/store/connections'
 
     export const prerender = false;
 
     /** @type {import('@sveltejs/kit').Load} */
 	export async function load({ fetch }) {
-        await connections.initStore(fetch);
+        // await connections.initStore(fetch);
 
         return {
             props: {
-                fetch
+                // fetch
             }
         }
     }
 
-</script>
+</script> -->
 
 <script lang="ts">
-    import { onMount } from 'svelte';
-    export let fetch;
+    export let connections;
+    // import { onMount } from 'svelte';
+    // export let fetch;
 
-    onMount(() => {
-        connections.rehydrateStore(fetch)
-    })
+    // onMount(() => {
+    //     connections.rehydrateStore(fetch)
+    // })
 
-    $: connectionList = $connections.connectionConfig
+    // $: connectionList = $connections.connectionConfig
 </script>
 
 <style>
@@ -63,7 +64,14 @@
     <h2>Connections</h2>
 
     <div class='connection-card-list'>
-    {#each connectionList as connection}
+    {#each connections as connection}
+        <a class='connection-card' href="/connection/{connection.name}">
+            <h3 class='connection-card__name'>
+                {connection.name}
+            </h3>
+        </a>
+    {/each}
+    <!-- {#each connectionList as connection}
         <a class='connection-card' href="/connection/{connection.name}">
             <h3 class='connection-card__name'>
                 {connection.name}
@@ -78,7 +86,7 @@
             </p>
             {/if}
         </a>
-    {/each}
+    {/each} -->
 
     <a class='connection-card' href='/connection/new'> + create new connection </a>
     </div>
