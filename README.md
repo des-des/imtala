@@ -13,9 +13,9 @@ There is a live example om the [website](https://imtala.com/).
 
 ### Installation
 
-Install a node package mananger:
+You can install using npm or another package manager.
 
-You can use npm to install globally with
+With npm, install globally with
 ```
 npm i -g @imtala/cli
 ```
@@ -28,7 +28,9 @@ npm i @imtala/cli
 
 ## Usage
 
-Run `imtala help` for commands and usage, or see below
+Start imtala with the command `imtala serve`, or run `imtala help` for commands and usage.
+
+Once you have started imtala, access the web client using a browser. From here you can add and configure connections. You can also use the cli to preload an introspection file, or generate a static documentation site.
 
 ### `imtala help`
 
