@@ -59,7 +59,19 @@ interface InitOauth {
     provider: 'github'
 }
 
-const SAVE_FOLDER_PATH = (import.meta.env && import.meta.env.VITE_IMTALA_DATA_DIRECTORY) || `${os.homedir()}/.imtala`
+const fetchDataDirectory = () => {
+    if (import.meta.env && import.meta.env.VITE_IMTALA_DATA_DIRECTORY) {
+        return import.meta.env && import.meta.env.VITE_IMTALA_DATA_DIRECTORY
+    }
+
+    if (process.env.IMTALA_DATA_DIRECTORY) {
+        return process.env.IMTALA_DATA_DIRECTORY;
+    }
+
+    return `${os.homedir()}/.imtala`
+}
+
+const SAVE_FOLDER_PATH = fetchDataDirectory()
 console.log('Config will be persisted to', path.resolve(SAVE_FOLDER_PATH))
 
 const save = ({
@@ -209,7 +221,6 @@ export const connectionStore = (() => {
         }
 
         if (connection.kind === 'http') {
-            console.log('making http request to ', connection.url, 'with auth', auth)
             return await graphqlRequest(connection.url, getIntrospectionQuery(), {}, auth ? {
                 authorization: auth
             } : {})
@@ -220,7 +231,6 @@ export const connectionStore = (() => {
         }
 
         if (connection.kind === 'github-oauth') {
-            console.log('FETCHING', graphqlRequest)
             return await graphqlRequest('https://api.github.com/graphql', getIntrospectionQuery(), {}, {
                 authorization: `Bearer ${auth}`
             })
@@ -245,7 +255,7 @@ export const connectionStore = (() => {
             }
         }
     }
-    
+
     return {
         listConnections,
         createOrUpdateConnection,
