@@ -31,8 +31,8 @@
 	</p>
 	<h2>Demos</h2>
 	<ol>
-		<li> > <a href="docs/github">Github GraphQL API</a></li>
-		<li> > <a href="docs/shopify">Shopify Storefront API</a></li>
+		<li> > <a sveltekit:prefetch href="docs/github">Github GraphQL API</a></li>
+		<li> > <a sveltekit:prefetch href="docs/shopify">Shopify Storefront API</a></li>
 	</ol>
 
 	<h2>Roadmap</h2>
