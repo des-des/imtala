@@ -7,8 +7,6 @@
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
-    "prod:init": "npm i -g pnpm && cd ../svelte-components && pnpm i && pnpm package && cd package && pnpm i",
-    "prod:build": "pwd && pnpm i && pnpm build",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
@@ -49,7 +47,7 @@
   },
   "homepage": "https://github.com/des-des/imtala#readme",
   "dependencies": {
-    "@imtala/svelte-components": "workspace:^1.2.1",
+    "@imtala/svelte-components": "workspace:^1.3.0",
     "graphql": "^16.5.0",
     "mdsvex": "^0.9.8"
   }
