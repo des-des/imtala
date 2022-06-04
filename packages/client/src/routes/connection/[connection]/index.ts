@@ -1,5 +1,7 @@
 import { isConnection, connectionStore } from '@imtala/svelte-components/api/db'
 import { parse } from 'cookie';
+import '$lib/init_db'
+
 
 /** @type {import('./index').RequestHandler} */
 export async function put({ request, params }) {

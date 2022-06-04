@@ -1,8 +1,8 @@
 packages:
   # all packages in subdirs of packages/ and components/
   - 'packages/client'
-  - 'packages/svelte-components'
   - 'packages/svelte-components/package'
+  - 'packages/svelte-components'
   - 'packages/cli'
   - 'packages/site'
   - 'packages/build-scripts'

@@ -1,4 +1,5 @@
 import  {connectionStore, type Connection} from '@imtala/svelte-components/api/db'
+import '$lib/init_db'
 
 export async function post({ request }) {
     const {connection, auth} = await request.json()
