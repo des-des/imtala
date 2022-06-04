@@ -11,9 +11,7 @@ import {
     type IntrospectionQuery
 } from 'graphql'
 import {request as graphqlRequest} from 'graphql-request'
-import fs from 'fs'
-import path from 'path'
-import os from 'os'
+
 
 import type { DocumentationProps } from '../components/DocProps'
 
@@ -59,43 +57,6 @@ interface InitOauth {
     provider: 'github'
 }
 
-const fetchDataDirectory = () => {
-    if (import.meta.env && import.meta.env.VITE_IMTALA_DATA_DIRECTORY) {
-        return import.meta.env && import.meta.env.VITE_IMTALA_DATA_DIRECTORY
-    }
-
-    if (process.env.IMTALA_DATA_DIRECTORY) {
-        return process.env.IMTALA_DATA_DIRECTORY;
-    }
-
-    return `${os.homedir()}/.imtala`
-}
-
-const SAVE_FOLDER_PATH = fetchDataDirectory()
-console.log('Config will be persisted to', path.resolve(SAVE_FOLDER_PATH))
-
-const save = ({
-    connections,
-}: {
-    connections: Map<string, Connection>,
-}) => {
-    fs.writeFileSync(`${SAVE_FOLDER_PATH}/connections.json`, JSON.stringify(Array.from(connections.values()), null, 4))
-}
-
-
-const init = (): Map<string, Connection> => {
-    if (!fs.existsSync(SAVE_FOLDER_PATH)) {
-        fs.mkdirSync(SAVE_FOLDER_PATH)
-    }
-
-    if (!fs.existsSync(`${SAVE_FOLDER_PATH}/connections.json`)) {
-        return new Map<string, Connection>()
-    }
-
-    const savedConnections = JSON.parse(fs.readFileSync(`${SAVE_FOLDER_PATH}/connections.json`).toString()) as Connection[]
-
-    return new Map(savedConnections.map(connection => ([connection.name, connection])))
-}
 
 
 const getTypeLinkDescription = (type: GraphQLType): string => {
@@ -184,7 +145,8 @@ const genDocProps = (introspectionQuery: IntrospectionQuery, connectionName: str
 
 
 export const connectionStore = (() => {
-    const connections = init()
+    let connections: Map<string, Connection> | undefined;
+    let save: (data: { connections: Map<string, Connection>}) => void;
     const introspectionStore = new Map<string, Promise<IntrospectionQuery>>()
 
     const createOrUpdateConnection = (connection: Connection) => {
@@ -200,6 +162,14 @@ export const connectionStore = (() => {
         }
         connections.set(connection.name, connection)
         save({connections: connections})
+    }
+
+    const start = (
+        init: () => Map<string, Connection>,
+        saveConnections: (data: { connections: Map<string, Connection>}) => void
+    ) => {
+        connections = init();
+        save = saveConnections;
     }
 
     const getConnection = (connectionName: string) => connections.get(connectionName)
@@ -263,6 +233,7 @@ export const connectionStore = (() => {
         getIntrospection,
         getTypeDocumentation,
         getGenDocsConnectionName,
+        start
     }
 })();
 

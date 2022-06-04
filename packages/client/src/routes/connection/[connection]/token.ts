@@ -1,3 +1,4 @@
+import '$lib/init_db'
 
 export async function post({ request }) {
     const { clientId, clientSecret, code }: {

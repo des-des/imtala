@@ -1,4 +1,5 @@
 import  {isConnection, connectionStore} from '../../../../../svelte-components/src/lib/api/db'
+import '$lib/init_db'
 
 /** @type {import('./callback').RequestHandler} */
 export async function get({ request, params }) {

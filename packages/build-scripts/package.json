@@ -11,6 +11,7 @@
   "dependencies": {
     "esbuild": "^0.14.42",
     "node-font2base64": "^0.7.1",
+    "promise-synchronizer": "^1.1.8",
     "subset-font": "^1.4.0",
     "typescript": "^4.7.2"
   }
