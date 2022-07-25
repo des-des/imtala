@@ -10,12 +10,23 @@
 	function handleSubmit(submitEvent) {
 		requestStatus = 'pending';
 
-		if (connectionType === 'gh') {
+		if (['gh', 'authcode'].includes(connectionType)) {
+			const urls = connectionType === 'gh' ? {
+				authorizationUrl: 'https://github.com/login/oauth/authorize',
+				tokenUrl: 'https://github.com/login/oauth/access_token',
+				graphqlUrl: 'https://api.github.com/graphql'
+			} : {
+				authorizationUrl: submitEvent.target['authorization-url'].value,
+				tokenUrl: submitEvent.target['token-url'].value,
+				graphqlUrl: submitEvent.target['graphql-url'].value,
+				
+			}
 			const connection: GithubOauthConnection = {
 				kind: 'github-oauth',
 				name: submitEvent.target.name.value,
 				clientId: submitEvent.target['client-id'].value,
-				clientSecret: submitEvent.target['client-secret'].value
+				clientSecret: submitEvent.target['client-secret'].value,
+				...urls
 			}
 
 			fetch('/connection', {
@@ -26,10 +37,11 @@
 				}
 			}).then(() => {
 				requestStatus = 'success'
-			})
-		}
+	    		goto(`/connection/${submitEvent.target.name.value}`);
 
-		const connection: HttpConnection = {
+			})
+		} else {
+			const connection: HttpConnection = {
 				kind: 'http',
 				name: submitEvent.target.name.value,
 				url: submitEvent.target['url'].value,
@@ -46,6 +58,7 @@
 			}).then(() => {
 	    		goto(`/connection/${submitEvent.target.name.value}`);
 			})
+		}
 	}
 </script>
 
@@ -56,6 +69,7 @@
 		<label for="authorization-type">connection type</label>
 		<select name="authorization-type" bind:value={connectionType}>
 			<option value="gh">Github oauth</option>
+			<option value="authcode">Oauth2 authorisation code flow</option>
 			<option value="http">Plain HTTP</option>
 		</select>
 		<label for="name">connection name</label>
@@ -71,7 +85,7 @@
 			<input required name="url" type="url" placeholder="https://" />
 			<label for="header">(Optional) Authentication header</label>
 			<input name="header" type="text" placeholder="Bearer xxxx" />
-		{:else}
+		<!-- {:else if connectionType === 'authcode'}
 			<label for="callback-url">callback url</label>
 			<input
 				disabled
@@ -80,6 +94,42 @@
 				value={(connectionName && `http://localhost:3000/connection/${connectionName}/callback`) ||
 					''}
 			/>
+			
+			<label for="client-id">client id</label>
+			<input required name="client-id" type="text" placeholder="xxxx" />
+			<label for="client-secret">client secret</label>
+			<input required name="client-secret" type="text" placeholder="xxxx" /> -->
+		{:else}
+			<label for="callback-url">callback url</label>
+			<input
+				disabled
+				name="callback-url"
+				type="url"
+				value={(connectionName && `http://localhost:3000/connection/${connectionName}/callback`) ||
+					''}
+			/>
+			{#if connectionType === 'authcode'}
+				<label for="graphql-url">GraphQL url</label>
+				<input
+					name="graphql-url"
+					type="url"
+				/>
+				<label for="authorization-url">Authorisation url</label>
+				<input
+					name="authorization-url"
+					type="url"
+				/>
+				<label for="token-url">Token url</label>
+				<input
+					name="token-url"
+					type="url"
+				/>
+				<label for="audience">Audience</label>
+				<input
+					name="audience"
+					type="string"
+				/>
+			{/if}
 			<label for="client-id">client id</label>
 			<input required name="client-id" type="text" placeholder="xxxx" />
 			<label for="client-secret">client secret</label>

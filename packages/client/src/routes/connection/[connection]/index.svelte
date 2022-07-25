@@ -34,7 +34,7 @@
     <p>Authentication required to connection to {connection.name}</p>
 
     {#if connection.kind === 'github-oauth'}
-        <a href='https://github.com/login/oauth/authorize?client_id={connection.clientId}'>connect to github</a>
+        <a href='{connection.authorizationUrl}?client_id={connection.clientId}&response_type=code&redirect_uri={encodeURI(`http://localhost:3000/connection/${connection.name}/callback`)} {connection.audience ? `&audience=${connection.audience}` : ''}'>connect</a>
     {/if}
 {:else if message}
     <p>Failed to establish connection</p>

@@ -13,16 +13,29 @@ export async function get({ request, params }) {
     if (connection.kind === 'github-oauth') {
         const {
             clientId,
-            clientSecret
+            clientSecret,
+            tokenUrl,
+            name
         } = connection
 
-        const accessTokenResponse = await fetch(`https://github.com/login/oauth/access_token?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`, {
+        const accessTokenResponse = await fetch(`${tokenUrl}`, {
             method: 'POST',
             headers: {
-                'Accept': 'application/json'
-            }
+                'Accept': 'application/json',
+                ['Content-Type']: 'application/json'
+            },
+            body: JSON.stringify({
+                client_id: clientId,
+                client_secret: clientSecret,
+                code: code,
+                response_type: 'code',
+                grant_type: 'authorization_code',
+                redirect_uri: `http://localhost:3000/connection/${name}/callback`
+            })
         })
-        const accessTokenResponsePayload = await accessTokenResponse.json();    
+        const accessTokenResponsePayload = await accessTokenResponse.json();
+
+        console.log({accessTokenResponsePayload})
 
         const token = accessTokenResponsePayload.access_token
 

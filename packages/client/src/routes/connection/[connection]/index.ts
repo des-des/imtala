@@ -108,6 +108,7 @@ export async function get({ request, params }) {
             }
         }
     } catch (e) {
+        console.error(e)
         return {
             body: {
                 connection,

@@ -26,7 +26,11 @@ export interface GithubOauthConnection {
     name: string;
     clientId: string;
     clientSecret: string;
-    preFetchedIntrospection?: IntrospectionQuery
+    authorisationUrl: string;
+    tokenUrl: string;
+    graphqlUrl: string;
+    audience?: string;
+    preFetchedIntrospection?: IntrospectionQuery;
 }
 
 export interface StaticIntrospectionConnection {
@@ -37,7 +41,7 @@ export interface StaticIntrospectionConnection {
 }
 
 // ?? this is wrong
-export const isConnection = (connection: any): connection is Connection => {
+export const isConnection = (connection: any): connection is Coaudiencennection => {
     if (typeof connection.name !== 'string') return false;
 
     if (connection.kind === 'github-oauth') return typeof connection.accessToken === 'string'
@@ -201,7 +205,7 @@ export const connectionStore = (() => {
         }
 
         if (connection.kind === 'github-oauth') {
-            return await graphqlRequest('https://api.github.com/graphql', getIntrospectionQuery(), {}, {
+            return await graphqlRequest(connection.graphqlUrl, getIntrospectionQuery(), {}, {
                 authorization: `Bearer ${auth}`
             })
         }
