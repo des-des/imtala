@@ -41,7 +41,7 @@ export interface StaticIntrospectionConnection {
 }
 
 // ?? this is wrong
-export const isConnection = (connection: any): connection is Coaudiencennection => {
+export const isConnection = (connection: any): connection is Connection => {
     if (typeof connection.name !== 'string') return false;
 
     if (connection.kind === 'github-oauth') return typeof connection.accessToken === 'string'
@@ -145,6 +145,95 @@ const genDocProps = (introspectionQuery: IntrospectionQuery, connectionName: str
         fields
     }
 }
+
+interface Page {
+    query: string;
+    connectionName: string;
+    name: string;
+    pageSettings: any;
+}
+
+export const pageStore = (() => {
+    let pages: Map<string, Page> | undefined;
+    let save: (data: { pages: Map<string, Page>}) => void;
+
+    const createOrUpdatePage = (page: Page) => {
+        pages.set(page.name, page)
+        save({pages})
+    }
+
+    const start = (
+        init: () => Map<string, Page>,
+        savePages: (data: { pages: Map<string, Page>}) => void
+    ) => {
+        pages = init();
+        save = savePages;
+    }
+
+    const getPage = (pageName: string) => pages.get(pageName)
+
+    // const getTypeDocumentation = async (connectionName: string, auth: string, typeName?: string) => {
+    //     const introspection = await getIntrospection(connectionName, auth)
+
+    //     return genDocProps(introspection, connectionName, typeName)
+    // }
+
+    // const getIntrospectionResponse = async (connectionName: string, auth: string) => {
+    //     const connection = connections.get(connectionName)
+    //     if (!connection) {
+    //         throw new Error('connection does not exist')
+    //     }
+
+    //     if (connection.kind === 'static-introspection') {
+    //         return connection.introspection;
+    //     }
+
+    //     if (connection.kind === 'http') {
+    //         return await graphqlRequest(connection.url, getIntrospectionQuery(), {}, auth ? {
+    //             authorization: auth
+    //         } : {})
+    //     }
+
+    //     if (connection.kind === 'github-oauth' && connection.preFetchedIntrospection) {
+    //         return connection.preFetchedIntrospection
+    //     }
+
+    //     if (connection.kind === 'github-oauth') {
+    //         return await graphqlRequest(connection.graphqlUrl, getIntrospectionQuery(), {}, {
+    //             authorization: `Bearer ${auth}`
+    //         })
+    //     }
+
+    // }
+
+    // const getIntrospection = (connectionName: string, auth: string) => {
+    //     if (!introspectionStore.has(connectionName)) {
+    //         introspectionStore.set(connectionName, getIntrospectionResponse(connectionName, auth))
+    //     }
+
+    //     return introspectionStore.get(connectionName)
+    // }
+
+    const listPages = () => Array.from(pages.values())
+
+    // const getGenDocsConnectionName = (): string => {
+    //     for (const connection of connections.values()) {
+    //         if (connection.kind === 'static-introspection' && connection.genDocs) {
+    //             return connection.name
+    //         }
+    //     }
+    // }
+
+    return {
+        listPages,
+        createOrUpdatePage,
+        getPage,
+        // getIntrospection,
+        // getTypeDocumentation,
+        // getGenDocsConnectionName,
+        start
+    }
+})();
 
 
 

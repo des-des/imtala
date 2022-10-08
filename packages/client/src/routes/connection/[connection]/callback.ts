@@ -43,7 +43,7 @@ export async function get({ request, params }) {
             status: 302,
             headers: {
                 Location: `/connection/${connection.name}`,
-                'set-cookie': [`imtala_${connection.name}=${token}; HttpOnly; Max-Age=${60 * 60 * 24 * 30};`]
+                'set-cookie': [`imtala_${connection.name}=${token}; HttpOnly; Max-Age=${60 * 60 * 24 * 30}; path=/`]
             }
         }
     }

@@ -1,7 +1,8 @@
 import {connectionStore} from '../../db'
 import { parse } from 'cookie';
+import {request as graphqlRequest} from 'graphql-request'
 
-const getIntrospection = async ({request, params}: {request: any, params: any}) => {
+const runQuery = async ({request, params}: {request: any, params: any}) => {
     const {connection: connectionName} = params
 
     if (typeof connectionName !== 'string') {
@@ -31,26 +32,12 @@ const getIntrospection = async ({request, params}: {request: any, params: any}) 
 
     if (connection.kind === 'static-introspection') {
         return {
-            body: {
-                introspection: connection.introspection,
-                connection
-            },
-            status: 200,
+            status: 400,
             headers: {
                 ['content-type']: 'application/json',
-            }
-        }
-    }
-
-    if ('preFetchedIntrospection' in connection) {
-        return {
-            body: {
-                introspection: connection.preFetchedIntrospection,
-                connection
             },
-            status: 200,
-            headers: {
-                ['content-type']: 'application/json',
+            body: {
+                error: `cannot execute gql query against static connection`
             }
         }
     }
@@ -72,18 +59,29 @@ const getIntrospection = async ({request, params}: {request: any, params: any}) 
         }
     }
 
-    const introspection = await connectionStore.getIntrospection(connectionName, token)
+
+    if (connection.kind === 'http') {
+        return {
+            body: {
+                connection,
+                message: 'graphql queries not supported http connection type',
+            },
+            status: 501,
+            headers: {
+                ['content-type']: 'application/json',
+            }
+        }
+    }
+
+    const response = await graphqlRequest(connection.graphqlUrl, await request.text(), {}, {
+        authorization: `Bearer ${token}`
+    })
 
     return {
-        body: {
-            connection,
-            introspection
-        },
-        status: 200,
-        headers: {
-            ['content-type']: 'application/json',
-        }
+        body: response,
+        status: response.status,
+        headers: response.headers
     }
 }
 
-export default getIntrospection;
+export default runQuery;

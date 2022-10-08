@@ -7,7 +7,7 @@ export async function post({ request }) {
     connectionStore.createOrUpdateConnection(connection)
 
     const cookie = (connection as Connection).kind === 'http' && auth ? {
-        'set-cookie': [`imtala_${connection.name}=${auth}; HttpOnly; Max-Age=${60 * 60 * 24 * 30};`]
+        'set-cookie': [`imtala_${connection.name}=${auth}; HttpOnly; Max-Age=${60 * 60 * 24 * 30}; Path=/`]
     } : {}
  
     return {
