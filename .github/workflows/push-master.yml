@@ -38,3 +38,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+      
+      - name: build
+        run: |
+          cd packages/imtala && pnpm build
