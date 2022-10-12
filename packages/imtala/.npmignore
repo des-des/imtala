@@ -1,1 +1,11 @@
 src
+.svelte-kit
+.eslintignore
+.eslintrc.cjs
+.prettierignore
+.prettierrc
+playwright.config.ts
+svelte.config.js
+tests/test.ts
+tsconfig.json
+vite.config.ts

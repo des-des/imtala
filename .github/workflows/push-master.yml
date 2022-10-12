@@ -42,3 +42,9 @@ jobs:
       - name: build
         run: |
           cd packages/imtala && pnpm build
+
+      - name: release
+        env: # Or as an environment variable
+          NPM_TOKEN: ${{ secrets.npm_token }}
+        run: |
+          cd packages/imtala && npm set //registry.npmjs.org/:_authToken="$NPM_TOKEN" && pnpm release
