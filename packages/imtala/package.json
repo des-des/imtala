@@ -1,6 +1,6 @@
 {
 	"name": "@imtala/imtala",
-	"version": "0.0.1",
+	"version": "2.0.0-next.0",
 	"private": true,
 	"devDependencies": {
 		"@playwright/test": "^1.25.0",
