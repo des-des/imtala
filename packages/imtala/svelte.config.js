@@ -8,6 +8,10 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+		files: {
+			routes: 'src/app/routes',
+			appTemplate: 'src/app/app.html'
+		},
 		adapter: adapter()
 	}
 };

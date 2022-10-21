@@ -4,7 +4,7 @@ on:
       - master
 
 jobs:
-  cache-and-install:
+  publish-cli:
     runs-on: ubuntu-latest
 
     steps:

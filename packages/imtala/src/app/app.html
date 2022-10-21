@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+	<meta name="viewport" content="width=device-width" />
+	%sveltekit.head%
+</head>
+
+<body>
+	<style>
+		:root {
+			--pink-8: #2e6874;
+			--pink-7: #423d83;
+			--pink-6: #271a26;
+			--action-remove: #977051;
+			--pink-4: #38121f;
+			--pink-3: #ca8174;
+			--pink-2: #d8ae77;
+			--pink-1: #d8e365;
+			--lime-1: #d8e365;
+			--lime-2: #c3d877;
+			--lime-3: #98ca74;
+			--lime-4: #81bd6f;
+			--lime-5: #6baf67;
+			--lime-6: #4f9765;
+			--lime-7: #3d836b;
+			--lime-8: #2e6874;
+			--lime-9: #2e6874;
+			--light-1: #dfe78a;
+			--light-2: #e6ebb4;
+			--light-3: #eff1d5;
+		}
+
+		body {
+			font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+			background-color: black;
+			color: white;
+		}
+
+		main {
+			width: 100%
+		}
+
+		input[type='submit'] {
+			cursor: pointer;
+			color: var(--lime-1);
+			border: none;
+			width:auto;
+			margin: 1em;
+			padding: 0;
+		}
+
+		a,
+		input[type='submit'] {
+			text-decoration: none;
+			color: var(--lime-1);
+		}
+		a:visited {
+			color: var(--lime-5);
+		}
+
+		a:hover,
+		input[type='submit']:hover {
+			background-color: var(--lime-8);
+		}
+
+		input,
+		select,
+		textarea {
+			font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+			outline: none;
+			background-color: black;
+			padding: 1em;
+			margin: 1em;
+			width: 30em;
+
+			border: 1px solid var(--lime-2);
+			font-size: 14px;
+			color: var(--lime-2);
+		}
+
+		label {
+			display: block;
+			margin: 0 1em;
+			/* width: 100%; */
+		}
+
+
+		@media only screen and (min-width: 400px) {
+			main {
+				width: 90%;
+				min-width: 600px;
+				max-width: 800px;
+				margin: auto;
+				border-left: 1px solid white;
+				padding-left: 20px;
+			}
+		}
+	</style>
+	<div>%sveltekit.body%</div>
+</body>
+
+</html>
